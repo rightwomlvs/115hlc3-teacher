@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>技高英語(三) L1: What's in My B.O.B.? 總目錄電子書</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f7fc;
+      font-family: "Times New Roman", "標楷體", "DFKai-SB", "BiauKai", serif;
+      font-size: 14pt;
+      line-height: 1.5;
+      color: #111827;
+      user-select: text;
+    }
+
+    /* 課堂懸浮工具列 */
+    .classroom-toolbar {
+      position: fixed;
+      top: 14px;
+      right: 20px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 4px 8px;
+      border-radius: 40px;
+      border: 1px solid rgba(203, 213, 225, 0.9);
+      box-shadow: 0 4px 22px rgba(0, 0, 0, 0.12);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .tool-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+      color: #334155;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      padding: 0;
+      user-select: none;
+    }
+    .tool-btn:hover {
+      background: #f1f5f9;
+      transform: scale(1.1);
+    }
+    .toolbar-divider {
+      width: 1px;
+      height: 18px;
+      background: #cbd5e1;
+      margin: 0 3px;
+    }
+
+    /* 目錄跳轉選單 */
+    .toc-menu {
+      display: none;
+      position: absolute;
+      top: 46px;
+      left: 0;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      padding: 6px 0;
+      min-width: 280px;
+      max-height: 420px;
+      overflow-y: auto;
+      z-index: 10000;
+    }
+    .toc-menu.show {
+      display: block;
+      animation: tocFadeIn 0.15s ease-out;
+    }
+    @keyframes tocFadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .toc-menu-title {
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #64748b;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .toc-menu-item {
+      padding: 9px 16px;
+      font-size: 13.5px;
+      color: #334155;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.12s, color 0.12s;
+    }
+    .toc-menu-item:hover {
+      background: #eff6ff;
+      color: #0284c7;
+      font-weight: bold;
+    }
+    .toc-page-badge {
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: normal;
+    }
+    .toc-menu-item:hover .toc-page-badge {
+      color: #0284c7;
+    }
+
+    /* A4 頁面排版容器 */
+    .pages-container {
+      padding: 20px 0 50px 0;
+    }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 13mm 15mm;
+      margin: 0 auto 26px auto;
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      page-break-after: always;
+      break-after: page;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    /* 頁面標頭與資訊欄 */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 5px;
+      margin-bottom: 8px;
+      font-size: 12.5pt;
+      font-weight: bold;
+      color: #1e3a8a;
+    }
+    .header-info-group {
+      display: flex;
+      gap: 16px;
+    }
+    .header-badge {
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 11pt;
+      font-weight: bold;
+    }
+    .header-badge.green-gold {
+      background: #fef9c3;
+      color: #a16207;
+    }
+
+    .main-title {
+      font-size: 18pt;
+      font-weight: 900;
+      text-align: center;
+      margin: 4px 0 2px 0;
+      color: #0f172a;
+      letter-spacing: 0.5px;
+    }
+    .sub-title {
+      font-size: 13pt;
+      font-weight: normal;
+      text-align: center;
+      color: #475569;
+      margin-bottom: 10px;
+    }
+
+    /* 封面設計 */
+    .cover-box {
+      border: 3px solid #0284c7;
+      background: linear-gradient(160deg, #f0f9ff 0%, #ffffff 60%);
+      border-radius: 16px;
+      padding: 42px 34px;
+      margin-top: 80px;
+      text-align: center;
+      position: relative;
+    }
+    .cover-emoji {
+      font-size: 64pt;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .cover-title {
+      font-size: 26pt;
+      font-weight: 900;
+      color: #0c4a6e;
+      margin-bottom: 6px;
+    }
+    .cover-sub {
+      font-size: 15pt;
+      color: #0369a1;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .cover-desc {
+      font-size: 13.5pt;
+      color: #475569;
+      line-height: 1.7;
+      text-align: left;
+      margin-top: 14px;
+      padding: 12px 18px;
+      background: #ffffff;
+      border: 1px dashed #7dd3fc;
+      border-radius: 10px;
+    }
+    .cover-desc b {
+      color: #0369a1;
+    }
+    .cover-chapters {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+    .cover-chapter-chip {
+      background: #e0f2fe;
+      border: 1px solid #bae6fd;
+      color: #0369a1;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 13pt;
+      font-weight: bold;
+    }
+
+    /* 總目錄卡片 */
+    .section-banner {
+      font-size: 14pt;
+      font-weight: bold;
+      background: linear-gradient(90deg, #e0f2fe 0%, #f0f9ff 100%);
+      padding: 5px 12px;
+      border-radius: 6px;
+      margin: 10px 0 8px 0;
+      border-left: 6px solid #0284c7;
+      color: #0c4a6e;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .banner-tag {
+      font-size: 11pt;
+      color: #0369a1;
+      font-weight: normal;
+    }
+    .chapter-card {
+      border: 2px solid #bfdbfe;
+      background: #f8fbff;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: stretch;
+      gap: 14px;
+      transition: all 0.15s ease;
+    }
+    .chapter-card:hover {
+      border-color: #0284c7;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.12);
+    }
+    .chapter-num {
+      flex: 0 0 74px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #e0f2fe;
+      border-radius: 10px;
+      padding: 8px 4px;
+      min-height: 96px;
+    }
+    .chapter-num .chap {
+      font-size: 11pt;
+      color: #0369a1;
+      font-weight: bold;
+    }
+    .chapter-num .roman {
+      font-size: 24pt;
+      font-weight: 900;
+      color: #0c4a6e;
+      line-height: 1.05;
+    }
+    .chapter-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .chapter-name {
+      font-size: 15pt;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+    .chapter-file {
+      font-size: 11pt;
+      color: #64748b;
+      margin-bottom: 4px;
+      font-family: Consolas, "Courier New", monospace;
+    }
+    .chapter-stages {
+      font-size: 12pt;
+      color: #334155;
+      line-height: 1.5;
+    }
+    .chapter-btn {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+    }
+    .chapter-btn a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #0284c7;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 13pt;
+      padding: 10px 18px;
+      border-radius: 26px;
+      text-decoration: none;
+      box-shadow: 0 3px 10px rgba(2, 132, 199, 0.3);
+      transition: all 0.15s ease;
+      cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .chapter-btn a:hover {
+      background: #0369a1;
+      transform: translateY(-1px);
+    }
+    .chapter-btn a.gold {
+      background: #f59e0b;
+      box-shadow: 0 3px 10px rgba(245, 158, 11, 0.3);
+    }
+    .chapter-btn a.gold:hover {
+      background: #d97706;
+    }
+
+    /* 頁尾 */
+    .page-footer {
+      margin-top: auto;
+      padding-top: 6px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11pt;
+      color: #64748b;
+    }
+    .page-badge-footer {
+      font-weight: bold;
+      color: #0369a1;
+    }
+
+    /* 列印樣式 */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm;
+      }
+      html, body {
+        width: 100% !important;
+        height: auto !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .no-print,
+      .classroom-toolbar,
+      .toc-menu {
+        display: none !important;
+      }
+      .pages-container {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        gap: 0 !important;
+      }
+      .page {
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        height: 275mm !important;
+        max-height: 275mm !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        overflow: hidden !important;
+      }
+      .page:last-child,
+      .page:last-of-type {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+      .page-footer {
+        position: static !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-top: auto !important;
+        padding-top: 6px !important;
+        padding-bottom: 2mm !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 課堂懸浮工具列 -->
+  <div class="classroom-toolbar no-print">
+    <div style="position: relative;">
+      <button class="tool-btn" id="tocBtn" onclick="toggleTocMenu(event)" title="總目錄導覽">
+        📑
+      </button>
+      <div class="toc-menu" id="tocMenu">
+        <div class="toc-menu-title">📖 L1 總目錄電子書</div>
+        <div class="toc-menu-item" onclick="jumpTo('page-1')"><span>封面與簡介</span><span class="toc-page-badge">P.1</span></div>
+        <div class="toc-menu-item" onclick="jumpTo('page-2')"><span>總目錄：四冊完整彙整</span><span class="toc-page-badge">P.2</span></div>
+      </div>
+    </div>
+    <div class="toolbar-divider"></div>
+    <button class="tool-btn" onclick="window.print()" title="列印封面與總目錄">
+      🖨️
+    </button>
+  </div>
+
+  <div class="pages-container">
+
+    <!-- ==================== PAGE 1 封面 ==================== -->
+    <div class="page" id="page-1">
+      <div class="page-header">
+        <div class="header-info-group">
+          <span>技術高中英語文 (三)</span>
+          <span>Lesson 1</span>
+          <span>生活科技 · 防災教育</span>
+        </div>
+        <div class="header-badge">總目錄 ｜ 導覽封面</div>
+      </div>
+
+      <div class="main-title">Lesson 1: What's in My B.O.B.?</div>
+      <div class="sub-title">四冊互動教材總彙整 ｜ 一份開門、四書齊用</div>
+
+      <div class="cover-box">
+        <div class="cover-emoji">🎒📖</div>
+        <div class="cover-title">L1 互動電子書總彙整</div>
+        <div class="cover-sub">四冊一覽 ｜ 教學、練習、評量 全到位</div>
+        <div class="cover-desc">
+          本總目錄將 <b>Lesson 1: What's in My B.O.B.?</b> 的四份互動教材彙整成冊，於課堂大屏一頁開啟、即可依教學節奏切換：<br><br>
+          <b>①</b> 完整 <b>五階段闖關互動電子書</b>（概念 → 詞彙 → 連線 → 句型 → 素養評量）<br>
+          <b>②</b> <b>基礎版互動學習單</b>（低認知負荷鷹架版，適合基礎班／資源班）<br>
+          <b>③</b> <b>原考卷卷一：字彙與翻譯</b>（單字中翻英 ＋ 文意字彙 ＋ 翻譯填充）<br>
+          <b>④</b> <b>原考卷卷二：語法與綜合</b>（語法測驗 ＋ 綜合測驗 ＋ 句型練習）
+        </div>
+        <div class="cover-chapters">
+          <div class="cover-chapter-chip">📚 互動電子書 · 5 頁</div>
+          <div class="cover-chapter-chip">📗 基礎學習單 · 3 頁</div>
+          <div class="cover-chapter-chip">📝 卷一 字彙翻譯 · 2 頁</div>
+          <div class="cover-chapter-chip">📝 卷二 語法綜合 · 2 頁</div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span>Lesson 1 總目錄電子書 ｜ 掃描右方四冊卡片，立即展開對應教材</span>
+        <span class="page-badge-footer">P.1</span>
+      </div>
+    </div>
+
+    <!-- ==================== PAGE 2 總目錄 ==================== -->
+    <div class="page" id="page-2">
+      <div class="page-header">
+        <div class="header-info-group">
+          <span>班級：___________</span>
+          <span>座號：_______</span>
+          <span>姓名：_______________</span>
+        </div>
+        <div class="header-badge green-gold">總目錄 ｜ 教材一覽</div>
+      </div>
+
+      <div class="main-title">Lesson 1 完整教材總目錄</div>
+      <div class="sub-title">點擊右側按鈕開啟對應互動教材（將另開新分頁）</div>
+
+      <div class="section-banner">
+        <span>📚 四冊教材索引（Table of Contents）</span>
+        <span class="banner-tag">共 4 冊 ｜ 12 頁 A4</span>
+      </div>
+
+      <!-- 冊一：完整互動電子書 -->
+      <div class="chapter-card">
+        <div class="chapter-num">
+          <span class="chap">冊一</span>
+          <span class="roman">Ⅰ</span>
+        </div>
+        <div class="chapter-info">
+          <div class="chapter-name">雙模式課堂教學互動電子書</div>
+          <div class="chapter-file">L01-interactive-ebook.html</div>
+          <div class="chapter-stages">
+            Stage 1 概念地圖與防災導讀 ｜ Stage 2 核心詞彙與短語百寶箱 ｜
+            Stage 3 防災物資連連看 ＆ 語法圈選 ｜ Stage 4 焦點句型深化 ＆ 重組演練 ｜
+            Stage 5 克漏字素養評量 ＆ 總檢核
+          </div>
+        </div>
+        <div class="chapter-btn">
+          <a href="L01-interactive-ebook.html" target="_blank" rel="noopener">開啟 →</a>
+        </div>
+      </div>
+
+      <!-- 冊二：基礎版互動學習單 -->
+      <div class="chapter-card">
+        <div class="chapter-num">
+          <span class="chap">冊二</span>
+          <span class="roman">Ⅱ</span>
+        </div>
+        <div class="chapter-info">
+          <div class="chapter-name">基礎版互動學習單（鷹架版）</div>
+          <div class="chapter-file">L01-basic-worksheet.html</div>
+          <div class="chapter-stages">
+            Stage 1 避難圖解 ＆ 觀念暖身 ｜ Stage 2 單字百寶箱 ＆ 物資連連看 ｜
+            Stage 3 鷹架克漏字 ＆ 必考句型演練
+          </div>
+        </div>
+        <div class="chapter-btn">
+          <a href="L01-basic-worksheet.html" target="_blank" rel="noopener">開啟 →</a>
+        </div>
+      </div>
+
+      <!-- 冊三：原考卷卷一 -->
+      <div class="chapter-card">
+        <div class="chapter-num">
+          <span class="chap">冊三</span>
+          <span class="roman">Ⅲ</span>
+        </div>
+        <div class="chapter-info">
+          <div class="chapter-name">原考卷雙頁版【卷一：字彙與翻譯】</div>
+          <div class="chapter-file">L01-exam1-vocab-trans.html</div>
+          <div class="chapter-stages">
+            第 1 頁：一、單字中翻英 ＆ 二、文意字彙 ｜
+            第 2 頁：三、翻譯填充
+          </div>
+        </div>
+        <div class="chapter-btn">
+          <a class="gold" href="L01-exam1-vocab-trans.html" target="_blank" rel="noopener">開啟 →</a>
+        </div>
+      </div>
+
+      <!-- 冊四：原考卷卷二 -->
+      <div class="chapter-card">
+        <div class="chapter-num">
+          <span class="chap">冊四</span>
+          <span class="roman">Ⅳ</span>
+        </div>
+        <div class="chapter-info">
+          <div class="chapter-name">原考卷雙頁版【卷二：語法與綜合】</div>
+          <div class="chapter-file">L01-exam2-grammar.html</div>
+          <div class="chapter-stages">
+            第 1 頁：一、語法測驗 ＆ 二、綜合測驗（篇章 I） ｜
+            第 2 頁：二、綜合測驗（篇章 II） ＆ 三、句型練習
+          </div>
+        </div>
+        <div class="chapter-btn">
+          <a class="gold" href="L01-exam2-grammar.html" target="_blank" rel="noopener">開啟 →</a>
+        </div>
+      </div>
+
+      <div class="section-banner" style="margin-top:18px;">
+        <span>💡 使用提示</span>
+        <span class="banner-tag">教師端大屏教學</span>
+      </div>
+      <div class="cover-desc" style="margin-top:2px;">
+        每冊皆為完整獨立互動電子書：<b>逐題點擊秀解答</b>、<b>👁️ 一鍵全開全書答案</b>、<b>✏️ 四色螢光筆/板書筆</b>、<b>🖨️ 列印即還原純淨學生白紙卷</b>。開啟後善用每冊右下角 📑 目錄選單即可快速跳轉各關卡。
+      </div>
+
+      <div class="page-footer">
+        <span>Lesson 1: What's in My B.O.B.? ｜ 總目錄電子書生成 20260911</span>
+        <span class="page-badge-footer">P.2</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // 目錄選單開關
+    function toggleTocMenu(e) {
+      e.stopPropagation();
+      var menu = document.getElementById('tocMenu');
+      menu.classList.toggle('show');
+    }
+    document.addEventListener('click', function(e) {
+      var menu = document.getElementById('tocMenu');
+      if (!menu.contains(e.target)) menu.classList.remove('show');
+    });
+
+    // 跳轉頁面
+    function jumpTo(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('tocMenu').classList.remove('show');
+      }
+    }
+  </script>
+</body>
+</html>
