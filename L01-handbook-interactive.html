@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>技高英語(三) L1: What's in My B.O.B. 句型手冊</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f7fc;
+      font-family: "Times New Roman", "標楷體", "DFKai-SB", "BiauKai", serif;
+      font-size: 14pt;
+      line-height: 1.5;
+      color: #111827;
+      user-select: text;
+    }
+
+    /* 課堂懸浮工具列 */
+    .classroom-toolbar {
+      position: fixed;
+      top: 14px;
+      right: 20px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 4px 8px;
+      border-radius: 40px;
+      border: 1px solid rgba(203, 213, 225, 0.9);
+      box-shadow: 0 4px 22px rgba(0, 0, 0, 0.12);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .tool-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+      color: #334155;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      padding: 0;
+      user-select: none;
+    }
+    .tool-btn:hover {
+      background: #f1f5f9;
+      transform: scale(1.1);
+    }
+    .tool-btn.active {
+      background: #0f172a;
+      color: #ffffff;
+    }
+    .btn-toggle-ans.active {
+      background: #eff6ff;
+      border-color: #2563eb;
+    }
+    .toolbar-divider {
+      width: 1px;
+      height: 18px;
+      background: #cbd5e1;
+      margin: 0 3px;
+    }
+
+    /* 章節目錄 */
+    .toc-menu {
+      display: none;
+      position: absolute;
+      top: 46px;
+      right: 0;
+      width: 300px;
+      max-height: 420px;
+      overflow-y: auto;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      box-shadow: 0 12px 38px rgba(2, 6, 23, 0.22);
+      padding: 8px;
+      text-align: left;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .toc-menu.show {
+      display: block;
+    }
+    .toc-menu-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f172a;
+      padding: 8px 10px 6px;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 4px;
+    }
+    .toc-menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      color: #334155;
+      cursor: pointer;
+    }
+    .toc-menu-item:hover {
+      background: #f1f5f9;
+    }
+    .toc-page-badge {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-radius: 10px;
+      padding: 1px 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* 畫筆工具盤 */
+    .pen-options {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      padding: 4px 8px;
+    }
+    .pen-options.show {
+      display: flex;
+    }
+    .color-picker {
+      display: flex;
+      gap: 4px;
+    }
+    .color-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px #cbd5e1;
+      cursor: pointer;
+      transition: transform 0.12s;
+    }
+    .color-dot.active {
+      transform: scale(1.25);
+      box-shadow: 0 0 0 2px #0f172a;
+    }
+    .size-btn {
+      width: 28px;
+      height: 26px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #ffffff;
+      font-size: 11px;
+      color: #334155;
+      cursor: pointer;
+    }
+    .size-btn.active {
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    /* 頁面容器 */
+    .pages-container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 24px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+    .page {
+      position: relative;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.13);
+      padding: 14mm 16mm;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .drawing-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 20;
+      pointer-events: none;
+    }
+    body.pen-mode .drawing-canvas {
+      pointer-events: auto;
+      cursor: crosshair;
+    }
+    body:not(.pen-mode) .interactive-item {
+      cursor: pointer;
+    }
+    body:not(.pen-mode) .interactive-item:hover {
+      background-color: #f1f5f9;
+      outline: 1px dashed #38bdf8;
+    }
+
+    /* 頁首 */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .header-info-group {
+      display: flex;
+      gap: 18px;
+      font-size: 12pt;
+      color: #475569;
+    }
+    .header-badge {
+      font-size: 12pt;
+      font-weight: bold;
+      color: #0369a1;
+      background: #e0f2fe;
+      border: 1px solid #bae6fd;
+      border-radius: 20px;
+      padding: 2px 14px;
+    }
+    .main-title {
+      font-size: 17pt;
+      font-weight: bold;
+      color: #0c4a6e;
+      margin: 4px 0 2px;
+      line-height: 1.3;
+    }
+    .sub-title {
+      font-size: 13.5pt;
+      color: #0369a1;
+      margin: 0 0 8px;
+      border-bottom: 2px solid #bae6fd;
+      padding-bottom: 4px;
+    }
+    .page-footer {
+      margin-top: auto;
+      padding-top: 6px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11pt;
+      color: #64748b;
+    }
+    .page-badge-footer {
+      font-weight: bold;
+      color: #0369a1;
+    }
+
+    /* Grammar Focus 橫幅 */
+    .gf-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(90deg, #0284c7, #38bdf8);
+      color: #ffffff;
+      border-radius: 10px;
+      padding: 6px 14px;
+      margin: 10px 0 8px;
+    }
+    .gf-num {
+      font-size: 12.5pt;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 1px 12px;
+      white-space: nowrap;
+    }
+    .gf-title {
+      font-size: 14.5pt;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .mini-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #ecfeff;
+      border: 1px solid #a5f3fc;
+      color: #155e75;
+      border-radius: 10px;
+      padding: 5px 14px;
+      margin: 10px 0 8px;
+    }
+    .mini-banner .mini-title {
+      font-size: 13pt;
+      font-weight: 700;
+    }
+    .mini-banner .mini-tag {
+      font-size: 11.5pt;
+      color: #0e7490;
+      margin-left: auto;
+    }
+    .test-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      border-radius: 10px;
+      padding: 6px 14px;
+      margin: 10px 0 8px;
+    }
+    .test-banner .test-title {
+      font-size: 14pt;
+      font-weight: 700;
+    }
+    .test-banner .test-tag {
+      font-size: 11.5pt;
+      color: #b45309;
+      margin-left: auto;
+    }
+
+    /* 範例句型區塊 */
+    .example-block {
+      border: 1px solid #dbeafe;
+      border-left: 5px solid #0284c7;
+      background: #f8fbff;
+      border-radius: 8px;
+      padding: 7px 12px;
+      margin: 7px 0;
+    }
+    .example-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5pt;
+      font-weight: 700;
+      color: #0369a1;
+      margin-bottom: 2px;
+    }
+    .src-tag {
+      font-size: 10.5pt;
+      font-weight: 400;
+      color: #64748b;
+      background: #e0f2fe;
+      border-radius: 10px;
+      padding: 0 8px;
+    }
+    .example-en {
+      font-size: 13pt;
+      line-height: 1.5;
+      color: #1e293b;
+    }
+    .example-en b {
+      color: #0284c7;
+      font-weight: 700;
+    }
+    .reveal-zh {
+      color: transparent;
+      font-size: 12.5pt;
+      line-height: 1.45;
+      transition: color 0.25s;
+    }
+    .show-ans .reveal-zh,
+    .item-line.show-one .reveal-zh,
+    .example-block.show-one .reveal-zh {
+      color: #dc2626 !important;
+    }
+    .zh-note {
+      color: #475569;
+      font-size: 12.5pt;
+      margin-top: 2px;
+    }
+
+    /* 說明區 */
+    .explain-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 7px 0;
+      font-size: 12.5pt;
+      line-height: 1.55;
+      color: #334155;
+    }
+    .explain-title {
+      font-weight: 700;
+      color: #0f766e;
+      font-size: 12.5pt;
+    }
+    .explain-box .eg-en {
+      font-size: 12.5pt;
+      color: #1f2937;
+      margin: 3px 0;
+    }
+    .explain-box .eg-arrow {
+      color: #0284c7;
+      font-weight: 700;
+    }
+    .tag-pill {
+      display: inline-block;
+      background: #cffafe;
+      color: #155e75;
+      border-radius: 6px;
+      padding: 0 6px;
+      font-size: 11.5pt;
+    }
+    .red-b {
+      color: #0284c7;
+    }
+
+    /* 受詞補語類型表格 */
+    .oc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12pt;
+      margin: 5px 0;
+      line-height: 1.5;
+    }
+    .oc-table th {
+      background: #e0f2fe;
+      color: #0c4a6e;
+      border: 1px solid #bae6fd;
+      padding: 4px 9px;
+      font-weight: 700;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .oc-table td {
+      border: 1px solid #e2e8f0;
+      padding: 4px 9px;
+      color: #334155;
+      vertical-align: top;
+    }
+
+    /* 選擇題 */
+    .qa-block {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 6px 10px;
+      margin: 6px 0;
+      background: #ffffff;
+    }
+    .qa-bracket {
+      font-size: 14pt;
+      font-weight: bold;
+      min-width: 42px;
+      text-align: center;
+      color: #334155;
+      border: 1.5px dashed #94a3b8;
+      border-radius: 8px;
+      padding: 2px 4px;
+      flex-shrink: 0;
+    }
+    .ans-slot {
+      display: inline-block;
+      min-width: 22px;
+      text-align: center;
+      color: transparent;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .show-ans .ans-slot,
+    .item-line.show-one .ans-slot,
+    .qa-block.show-one .ans-slot {
+      color: #dc2626 !important;
+    }
+    .qa-content {
+      flex: 1;
+    }
+    .qa-stem {
+      font-size: 13pt;
+      line-height: 1.5;
+      color: #1e293b;
+    }
+    .qa-stem b {
+      color: #0284c7;
+    }
+    .qa-options {
+      font-size: 12.5pt;
+      color: #475569;
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+    .correct-choice {
+      display: inline-block;
+      padding: 0 3px;
+      transition: all 0.2s;
+    }
+    .show-ans .correct-choice,
+    .item-line.show-one .correct-choice,
+    .qa-block.show-one .correct-choice {
+      color: #dc2626 !important;
+      font-weight: bold !important;
+      border: 2px solid #dc2626 !important;
+      border-radius: 12px !important;
+      background-color: #fef2f2 !important;
+      padding: 0 5px !important;
+    }
+    .qa-grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 12px;
+    }
+
+    /* 翻譯／句型練習（書寫空間） */
+    .item-line {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 6px 10px;
+      margin: 6px 0;
+      background: #ffffff;
+    }
+    .item-line .item-title {
+      font-size: 13pt;
+      line-height: 1.5;
+      color: #1e293b;
+    }
+    .item-line .item-title b {
+      color: #0284c7;
+    }
+    .blank-line {
+      display: inline-block;
+      min-width: 180px;
+      border-bottom: 1.5px solid #94a3b8;
+      height: 1.1em;
+    }
+    .calc-workspace {
+      min-height: 78px;
+      margin: 6px 0 2px 0;
+      padding: 6px 10px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 6px;
+      background-color: #f8fafc;
+      position: relative;
+    }
+    .calc-solution {
+      color: transparent;
+      font-size: 12.5pt;
+      line-height: 1.55;
+      transition: color 0.2s;
+    }
+    .show-ans .calc-solution,
+    .calc-workspace.show-one .calc-solution,
+    .interactive-item.show-one .calc-solution {
+      color: #dc2626 !important;
+      font-weight: bold;
+    }
+    .hint-inline {
+      font-size: 12pt;
+      color: #64748b;
+    }
+
+    /* 三、句型練習 標籤 */
+    .practice-tag {
+      display: inline-block;
+      font-size: 11.5pt;
+      font-weight: 700;
+      color: #0369a1;
+      background: #e0f2fe;
+      border-radius: 8px;
+      padding: 1px 10px;
+      margin-right: 6px;
+    }
+
+    /* 總評卡 */
+    .eval-card {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.5fr;
+      gap: 12px;
+      border: 1.5px dashed #0284c7;
+      background: #f0f9ff;
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin-top: 8px;
+      align-items: center;
+    }
+    .eval-stars {
+      font-size: 12.5pt;
+      color: #0c4a6e;
+      font-weight: bold;
+    }
+    .stamp-box {
+      border: 2px dashed #94a3b8;
+      background: #ffffff;
+      border-radius: 6px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11pt;
+      color: #94a3b8;
+      text-align: center;
+    }
+    .teacher-sign-box {
+      font-size: 12pt;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm;
+      }
+      html, body {
+        width: 100% !important;
+        height: auto !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print,
+      .classroom-toolbar,
+      .toc-menu,
+      .drawing-canvas {
+        display: none !important;
+      }
+      .pages-container {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        gap: 0 !important;
+      }
+      .page {
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        height: 275mm !important;
+        max-height: 275mm !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        overflow: hidden !important;
+      }
+      .page:last-child,
+      .page:last-of-type {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+      .page-footer {
+        position: static !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-top: auto !important;
+        padding-top: 4px !important;
+        padding-bottom: 2mm !important;
+      }
+      .correct-choice {
+        color: inherit !important;
+        font-weight: normal !important;
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+      }
+      .ans-slot, .ans-word {
+        color: transparent !important;
+      }
+      .reveal-zh {
+        color: #1f2937 !important;
+      }
+      .calc-workspace {
+        border: 1px dashed #94a3b8 !important;
+        background: transparent !important;
+        min-height: 70px !important;
+      }
+      .calc-solution {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 課堂懸浮工具列 -->
+  <div class="classroom-toolbar no-print">
+    <div style="position: relative;">
+      <button class="tool-btn" id="tocBtn" onclick="toggleTocMenu(event)" title="章節目錄導覽">📑</button>
+      <div class="toc-menu" id="tocMenu">
+        <div class="toc-menu-title">📖 句型手冊章節目錄</div>
+        <div class="toc-menu-item" onclick="jumpTo('page-1')"><span>GF1 find/leave/keep + O + OC</span><span class="toc-page-badge">P.1</span></div>
+        <div class="toc-menu-item" onclick="jumpTo('page-2')"><span>GF1 補語類型 ＆ 小試身手</span><span class="toc-page-badge">P.2</span></div>
+        <div class="toc-menu-item" onclick="jumpTo('page-3')"><span>GF2 not only A but (also) B</span><span class="toc-page-badge">P.3</span></div>
+        <div class="toc-menu-item" onclick="jumpTo('page-4')"><span>GF2 倒裝 ＆ 小試身手 ＋ GF3 as soon as</span><span class="toc-page-badge">P.4</span></div>
+        <div class="toc-menu-item" onclick="jumpTo('page-5')"><span>GF3 小試身手 ＋ GF4 either A or B</span><span class="toc-page-badge">P.5</span></div>
+        <div class="toc-menu-item" onclick="jumpTo('page-6')"><span>GF4 主詞一致性 ＆ 小試身手</span><span class="toc-page-badge">P.6</span></div>
+        <div class="toc-menu-item" onclick="jumpTo('page-7')"><span>實力測驗：語法測驗（1–10）</span><span class="toc-page-badge">P.7</span></div>
+        <div class="toc-menu-item" onclick="jumpTo('page-8')"><span>實力測驗：填充 ＆ 句型練習</span><span class="toc-page-badge">P.8</span></div>
+      </div>
+    </div>
+    <button class="tool-btn btn-toggle-ans" id="toggleAllAnsBtn" onclick="toggleAllAnswers()" title="一鍵全開/全隱答案">
+      <span id="ansIcon">👁️</span>
+    </button>
+    <button class="tool-btn" id="penBtn" onclick="togglePenMode()" title="螢光筆/板書筆">✏️</button>
+    <div class="pen-options" id="penOptions">
+      <div class="color-picker">
+        <span class="color-dot active" style="background:#facc15;" onclick="setPenColor('rgba(250, 204, 21, 0.45)', this)" title="螢光黃"></span>
+        <span class="color-dot" style="background:#ef4444;" onclick="setPenColor('rgba(239, 68, 68, 0.8)', this)" title="紅筆"></span>
+        <span class="color-dot" style="background:#3b82f6;" onclick="setPenColor('rgba(37, 99, 235, 0.8)', this)" title="藍筆"></span>
+        <span class="color-dot" style="background:#10b981;" onclick="setPenColor('rgba(16, 185, 129, 0.8)', this)" title="綠筆"></span>
+      </div>
+      <div class="toolbar-divider"></div>
+      <div class="size-picker">
+        <button class="size-btn active" onclick="setPenSize(4, this)">細</button>
+        <button class="size-btn" onclick="setPenSize(10, this)">中</button>
+        <button class="size-btn" onclick="setPenSize(20, this)">粗</button>
+      </div>
+    </div>
+    <button class="tool-btn" onclick="clearAllDrawings()" title="清除畫筆">🧹</button>
+    <div class="toolbar-divider"></div>
+    <button class="tool-btn" onclick="smartPrint()" title="列印為學生白紙卷">🖨️</button>
+  </div>
+
+  <div class="pages-container" id="pagesContainer">
+
+    <!-- ==================== PAGE 1：GF1 find/leave/keep + O + OC ==================== -->
+    <div class="page" id="page-1">
+      <canvas class="drawing-canvas"></canvas>
+      <div class="page-header">
+        <div class="header-info-group">
+          <span>班級：___________</span>
+          <span>座號：_______</span>
+          <span>姓名：_______________</span>
+        </div>
+        <div class="header-badge">句型停看聽</div>
+      </div>
+      <div class="main-title">Lesson 1: What's in My B.O.B.</div>
+      <div class="sub-title">句型手冊 ｜ Grammar Focus 1：S + find / leave / keep + O + 受詞補語（OC）</div>
+
+      <div class="gf-banner">
+        <span class="gf-num">Grammar Focus 1</span>
+        <span class="gf-title">使役∕感受動詞 ＋ 受詞 ＋ 受詞補語 ｜ S + find / leave / keep + O + OC</span>
+      </div>
+
+      <div class="example-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="example-label">範例 1 <span class="src-tag">課文第 3 行</span></div>
+        <div class="example-en">I <b>found</b> myself <b>shaking</b> with fright.</div>
+        <div class="reveal-zh">我發現自己嚇得發抖。</div>
+      </div>
+
+      <div class="example-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="example-label">範例 2 <span class="src-tag">課文第 14 行</span></div>
+        <div class="example-en">A backpack is comfortable to carry and <b>leaves</b> your hands <b>free</b> to use tools or help others.</div>
+        <div class="reveal-zh">後背包背起來舒服，而且讓你的雙手可以空出來使用工具或幫助他人。</div>
+      </div>
+
+      <div class="example-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="example-label">範例 3 <span class="src-tag">課文第 27 行</span></div>
+        <div class="example-en">You should not only <b>keep</b> the items <b>updated</b> but also make sure that you can grab your bag quickly.</div>
+        <div class="reveal-zh">你不只要持續更新內容物，還要確保能快速抓取你的包包。</div>
+      </div>
+
+      <div class="explain-box">
+        <div class="explain-title">說明 1</div>
+        <b>find</b>（發覺；認為）、<b>leave</b>（使處於某狀態）、<b>keep</b>（使保持某狀態）後面可以接「受詞 O + 受詞補語 OC」。<u>受詞補語</u>用來說明受詞的狀態或動作。<br>
+        <div class="eg-en">S + find / leave / keep + O + <span class="tag-pill">形容詞</span> <span class="tag-pill">現在分詞 V-ing</span> <span class="tag-pill">過去分詞 Vpp</span></div>
+      </div>
+
+      <div class="page-footer">
+        <span class="page-badge-footer">句型手冊 ｜ 第 1 / 8 頁</span>
+        <span>GF1 find / leave / keep + O + OC</span>
+      </div>
+    </div>
+
+    <!-- ==================== PAGE 2：GF1 補語類型 ＋ 小試身手 ==================== -->
+    <div class="page" id="page-2">
+      <canvas class="drawing-canvas"></canvas>
+      <div class="page-header">
+        <div class="header-info-group">
+          <span>班級：___________</span>
+          <span>座號：_______</span>
+          <span>姓名：_______________</span>
+        </div>
+        <div class="header-badge">Grammar Focus 1 續</div>
+      </div>
+      <div class="main-title">Lesson 1: What's in My B.O.B.</div>
+      <div class="sub-title">句型手冊 ｜ 受詞補語的類型 ＆ 小試身手</div>
+
+      <div class="explain-box">
+        <div class="explain-title">說明 2：補語的類型不同，作用也不同</div>
+        <table class="oc-table">
+          <tr>
+            <th>補語類型</th>
+            <th>作用</th>
+            <th>例句</th>
+          </tr>
+          <tr>
+            <td>形容詞<br>(adj.)</td>
+            <td>描述狀態</td>
+            <td>May always <b class="red-b">keeps</b> her room <b class="red-b">tidy</b>.<br><span class="zh-note">S V O OC（adj.）｜ May 總是保持房間整齊。</span></td>
+          </tr>
+          <tr>
+            <td>現在分詞<br>(V-ing)</td>
+            <td>表示主動動作</td>
+            <td>James <b class="red-b">left</b> the music <b class="red-b">playing</b> when he went out.<br><span class="zh-note">S V O OC（V-ing）｜ James 出門時讓音樂一直播放。</span></td>
+          </tr>
+          <tr>
+            <td>過去分詞<br>(Vpp)</td>
+            <td>表示被動動作</td>
+            <td>She <b class="red-b">found</b> her mirror <b class="red-b">broken</b> when she got home.<br><span class="zh-note">S V O OC（Vpp）｜ 當她回到家時發現鏡子被打破了。</span></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="mini-banner">
+        <span class="mini-title">✏️ 小試身手</span>
+        <span class="mini-tag">find / leave / keep + O + OC（點擊題目揭曉答案）</span>
+      </div>
+
+      <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="qa-bracket">( <span class="ans-slot">C</span> )</div>
+        <div class="qa-content">
+          <div class="qa-stem">The careless family left their door <b>______</b> when they went on vacation.</div>
+          <div class="qa-options">(A) to unlock &nbsp; (B) unlocking &nbsp;<span class="correct-choice">(C) unlocked</span> &nbsp; (D) unlock</div>
+        </div>
+      </div>
+
+      <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="qa-bracket">( <span class="ans-slot">B</span> )</div>
+        <div class="qa-content">
+          <div class="qa-stem">The teacher found the students <b>______</b> in the back of the classroom.</div>
+          <div class="qa-options">(A) to chat &nbsp;<span class="correct-choice">(B) chatting</span> &nbsp; (C) are chatted &nbsp; (D) chat</div>
+        </div>
+      </div>
+
+      <div class="item-line interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="item-title">3. 那個新的銷售計畫讓整個辦公室忙碌了一整個月。<span class="hint-inline">（keep / leave + O + 形容詞）</span></div>
+        <div class="calc-workspace">
+          <div class="calc-solution">That new sales plan kept / left the entire office busy for a whole month.</div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span class="page-badge-footer">句型手冊 ｜ 第 2 / 8 頁</span>
+        <span>GF1 受詞補語類型 ＆ 小試身手</span>
+      </div>
+    </div>
+
+    <!-- ==================== PAGE 3：GF2 not only A but (also) B ==================== -->
+    <div class="page" id="page-3">
+      <canvas class="drawing-canvas"></canvas>
+      <div class="page-header">
+        <div class="header-info-group">
+          <span>班級：___________</span>
+          <span>座號：_______</span>
+          <span>姓名：_______________</span>
+        </div>
+        <div class="header-badge">句型停看聽</div>
+      </div>
+      <div class="main-title">Lesson 1: What's in My B.O.B.</div>
+      <div class="sub-title">句型手冊 ｜ Grammar Focus 2：not only A but (also) B｜不只 A 而且 B</div>
+
+      <div class="gf-banner">
+        <span class="gf-num">Grammar Focus 2</span>
+        <span class="gf-title">not only A but (also) B ｜ 不只 A 而且 B（對等連接詞）</span>
+      </div>
+
+      <div class="example-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="example-label">範例 1 <span class="src-tag">課文第 9 行</span></div>
+        <div class="example-en">It is basically a survival kit <b>not only for natural disasters but also for other emergencies</b>, such as house fires.</div>
+        <div class="reveal-zh">它基本上是一個生存包，不只作為應對天然災難，還能用在其他緊急狀況，例如居家火災。</div>
+      </div>
+
+      <div class="example-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="example-label">範例 2 <span class="src-tag">課文第 27 行</span></div>
+        <div class="example-en">You should <b>not only keep</b> the items updated <b>but also make sure</b> that you can grab your bag quickly.</div>
+        <div class="reveal-zh">你不只要持續更新內容物，還要確保能快速抓取你的包包。</div>
+      </div>
+
+      <div class="explain-box">
+        <div class="explain-title">說明 1：對等連接詞，強調兩個相關且同時存在的資訊</div>
+        <b>not only A but (also) B</b> 用來強調兩個相關並同時存在的資訊，A 與 B 的語法結構需一致（同詞性或時態、同為片語或子句）。<br>
+        <div class="eg-en">My sister plays <b>not only the piano but (also) the violin</b>.<br><span class="zh-note">A（名詞） B（名詞）｜ 我姊姊不僅會彈鋼琴，還會拉小提琴。</span></div>
+        <div class="eg-en">My sister <b>not only plays</b> the piano <b>but (also) plays</b> the violin.<br><span class="zh-note">A（動詞片語） B（動詞片語）</span></div>
+        <div class="eg-en">It was <b>not only cold but (also) windy</b> yesterday.<br><span class="zh-note">A（形容詞） B（形容詞）｜ 昨天不只寒冷，還風大。</span></div>
+      </div>
+
+      <div class="explain-box">
+        <div class="explain-title">說明 2：A＋B 連接兩個名詞作為主詞時，動詞要與 B（第二個主詞）一致</div>
+        <div class="eg-en"><b>Not only the players but (also) the coach was</b> upset after the loss.<br><span class="zh-note">A（players） B（coach） V（與 B 一致）｜ 不僅球員們，還有教練在輸球後也感到悶悶不樂。</span></div>
+      </div>
+
+      <div class="page-footer">
+        <span class="page-badge-footer">句型手冊 ｜ 第 3 / 8 頁</span>
+        <span>GF2 not only A but (also) B</span>
+      </div>
+    </div>
+
+    <!-- ==================== PAGE 4：GF2 倒裝 ＋ 小試身手 ＋ GF3 as soon as ==================== -->
+    <div class="page" id="page-4">
+      <canvas class="drawing-canvas"></canvas>
+      <div class="page-header">
+        <div class="header-info-group">
+          <span>班級：___________</span>
+          <span>座號：_______</span>
+          <span>姓名：_______________</span>
+        </div>
+        <div class="header-badge">句型停看聽</div>
+      </div>
+      <div class="main-title">Lesson 1: What's in My B.O.B.</div>
+      <div class="sub-title">句型手冊 ｜ GF2 倒裝強調 ＆ 小試身手 ｜ GF3 as soon as</div>
+
+      <div class="explain-box">
+        <div class="explain-title">說明 3：用 Not only 開頭強調語氣時，後面子句要用倒裝</div>
+        <div class="eg-en"><span class="eg-arrow">ordinary</span> The team <b>not only won</b> the game <b>but (also) set</b> a new record.<br>
+        <span class="eg-arrow">inversion</span> <b>Not only did</b> the team <b>win</b> the game, <b>but they (also) set</b> a new record.</div>
+        <div class="zh-note">倒裝（助動詞 + 主詞 + 原形動詞）變成子句 but + S (+ also) + V ｜ 那支隊伍不僅贏得比賽，還創下新紀錄。</div>
+      </div>
+
+      <div class="mini-banner">
+        <span class="mini-title">✏️ 小試身手</span>
+        <span class="mini-tag">not only A but (also) B</span>
+      </div>
+
+      <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="qa-bracket">( <span class="ans-slot">D</span> )</div>
+        <div class="qa-content">
+          <div class="qa-stem">Sue is not only a brilliant dancer but also <b>______</b>.</div>
+          <div class="qa-options">(A) talent &nbsp; (B) talented actress &nbsp; (C) acts well &nbsp;<span class="correct-choice">(D) a talented actress</span></div>
+        </div>
+      </div>
+
+      <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="qa-bracket">( <span class="ans-slot">B</span> )</div>
+        <div class="qa-content">
+          <div class="qa-stem">This AI robot not only <b>______</b> with you but also helps with housework.</div>
+          <div class="qa-options">(A) chat &nbsp;<span class="correct-choice">(B) chats</span> &nbsp; (C) chatted &nbsp; (D) chatting</div>
+        </div>
+      </div>
+
+      <div class="item-line interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="item-title">3. 科技讓運動員不僅能獲得最佳訓練效益，還能保持免於受傷。<span class="hint-inline">【統 112 年】</span></div>
+        <div class="calc-workspace">
+          <div class="calc-solution">Technology allows athletes to not only get the most out of their training but also stay injury free.</div>
+        </div>
+      </div>
+
+      <div class="gf-banner">
+        <span class="gf-num">Grammar Focus 3</span>
+        <span class="gf-title">as soon as ｜ 一……就……（表時間順序）</span>
+      </div>
+
+      <div class="example-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="example-label">範例 <span class="src-tag">課文第 7 行</span></div>
+        <div class="example-en"><b>As soon as</b> the shaking stopped, I reached for my B.O.B.</div>
+        <div class="reveal-zh">震動一停止，我就伸手去拿我的生存包。</div>
+      </div>
+
+      <div class="explain-box">
+        <div class="explain-title">說明 1：從屬連接詞，強調一件事緊接著另一件事發生</div>
+        <b>as soon as</b> 連接兩個動作或事件子句，可放在句首或句中；as soon as 後接的是<u>先發生</u>的事件或動作。也可用 <b>the moment / the minute</b> 代替。<br>
+        <div class="eg-en"><b>As soon as</b> the meeting ended, the CEO left the meeting room.<br>
+        <span class="eg-arrow">=</span> The CEO left the meeting room <b>as soon as</b> the meeting ended.<br>
+        <span class="eg-arrow">=</span> The CEO left the meeting room <b>the moment</b> the meeting ended.<br>
+        <span class="zh-note">A（先發生）→ B（後發生）｜ 會議一結束，執行長就離開了會議室。</span></div>
+      </div>
+
+      <div class="page-footer">
+        <span class="page-badge-footer">句型手冊 ｜ 第 4 / 8 頁</span>
+        <span>GF2 倒裝 ＆ 小試身手 ＋ GF3 as soon as</span>
+      </div>
+    </div>
+
+    <!-- ==================== PAGE 5：GF3 小試身手 ＋ GF4 either A or B ==================== -->
+    <div class="page" id="page-5">
+      <canvas class="drawing-canvas"></canvas>
+      <div class="page-header">
+        <div class="header-info-group">
+          <span>班級：___________</span>
+          <span>座號：_______</span>
+          <span>姓名：_______________</span>
+        </div>
+        <div class="header-badge">句型停看聽</div>
+      </div>
+      <div class="main-title">Lesson 1: What's in My B.O.B.</div>
+      <div class="sub-title">句型手冊 ｜ GF3 as soon as 小試身手 ｜ GF4 either A or B</div>
+
+      <div class="explain-box">
+        <div class="explain-title">說明 2：用於未來式時，as soon as 接的子句要用現在簡單式</div>
+        <div class="eg-en">Jason will call you <b>as soon as</b> his plane <b class="red-b">lands</b>.<br>
+        <span class="zh-note">未來式（will call）＋ 現在簡單式代替未來式（lands）｜ Jason 的班機一落地，他就會打給你。</span></div>
+      </div>
+
+      <div class="mini-banner">
+        <span class="mini-title">✏️ 小試身手</span>
+        <span class="mini-tag">as soon as</span>
+      </div>
+
+      <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="qa-bracket">( <span class="ans-slot">A</span> )</div>
+        <div class="qa-content">
+          <div class="qa-stem"><b>______</b> the teacher entered the classroom, the students stopped talking.</div>
+          <div class="qa-options"><span class="correct-choice">(A) As soon as</span> &nbsp; (B) As far as &nbsp; (C) As well as &nbsp; (D) As fast as</div>
+        </div>
+      </div>
+
+      <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="qa-bracket">( <span class="ans-slot">C</span> )</div>
+        <div class="qa-content">
+          <div class="qa-stem">I'll let you know as soon as I <b>______</b> anything.</div>
+          <div class="qa-options">(A) will hear &nbsp; (B) am heard &nbsp;<span class="correct-choice">(C) hear</span> &nbsp; (D) heard</div>
+        </div>
+      </div>
+
+      <div class="item-line interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="item-title">3. 每天早上鬧鐘一響，Victor 就把它關掉。</div>
+        <div class="calc-workspace">
+          <div class="calc-solution">As soon as the alarm goes off every morning, Victor turns it off.</div>
+        </div>
+      </div>
+
+      <div class="gf-banner">
+        <span class="gf-num">Grammar Focus 4</span>
+        <span class="gf-title">either A or B ｜ 不是 A 就是 B（二擇一）</span>
+      </div>
+
+      <div class="example-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="example-label">範例 <span class="src-tag">課文第 32 行</span></div>
+        <div class="example-en">We can <b>either be safe or be sorry</b>.</div>
+        <div class="reveal-zh">我們不是安全度過，就是事後懊悔。</div>
+      </div>
+
+      <div class="explain-box">
+        <div class="explain-title">說明 1：表示「二擇一」的對等連接詞</div>
+        <b>either A or B</b> 表示「二擇一」，連接兩個動作、事件或人，被連接的兩個部分需性質一致。<br>
+        <div class="eg-en">The keys are <b>either on the table or in the bag</b>.<br><span class="zh-note">A（介系詞片語） B（介系詞片語）｜ 鑰匙不是在桌上，就是在包包裡。</span></div>
+        <div class="eg-en">We can <b>either go hiking or stay home</b> this coming weekend.<br><span class="zh-note">A（動詞片語） B（動詞片語）｜ 我們接下來這週末可以去爬山或待在家裡。</span></div>
+      </div>
+
+      <div class="page-footer">
+        <span class="page-badge-footer">句型手冊 ｜ 第 5 / 8 頁</span>
+        <span>GF3 小試身手 ＋ GF4 either A or B</span>
+      </div>
+    </div>
+
+    <!-- ==================== PAGE 6：GF4 主詞一致性 ＋ 小試身手 ==================== -->
+    <div class="page" id="page-6">
+      <canvas class="drawing-canvas"></canvas>
+      <div class="page-header">
+        <div class="header-info-group">
+          <span>班級：___________</span>
+          <span>座號：_______</span>
+          <span>姓名：_______________</span>
+        </div>
+        <div class="header-badge">句型停看聽</div>
+      </div>
+      <div class="main-title">Lesson 1: What's in My B.O.B.</div>
+      <div class="sub-title">句型手冊 ｜ GF4 主詞一致 ＆ 小試身手</div>
+
+      <div class="explain-box">
+        <div class="explain-title">說明 2：A＋B 連接兩個名詞作為主詞時，動詞要與 B（第二個主詞）一致</div>
+        <div class="eg-en"><b>Either you or your brother has</b> to take out the trash tonight.<br>
+        <span class="zh-note">A（you） B（your brother） V（與 B 一致）｜ 不是你就是你弟今晚必須拿垃圾出去丟。</span></div>
+      </div>
+
+      <div class="mini-banner">
+        <span class="mini-title">✏️ 小試身手</span>
+        <span class="mini-tag">either A or B</span>
+      </div>
+
+      <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="qa-bracket">( <span class="ans-slot">B</span> )</div>
+        <div class="qa-content">
+          <div class="qa-stem">Either you get out of my house now, <b>______</b> I'll call the police.</div>
+          <div class="qa-options">(A) as &nbsp;<span class="correct-choice">(B) or</span> &nbsp; (C) of &nbsp; (D) by</div>
+        </div>
+      </div>
+
+      <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="qa-bracket">( <span class="ans-slot">C</span> )</div>
+        <div class="qa-content">
+          <div class="qa-stem">If it rains heavily tomorrow, the event will be either postponed（延期）or <b>______</b>.</div>
+          <div class="qa-options">(A) cancel &nbsp; (B) to cancel &nbsp;<span class="correct-choice">(C) canceled</span> &nbsp; (D) canceling</div>
+        </div>
+      </div>
+
+      <div class="item-line interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="item-title">3. 別擔心，因為不是 John 就是他的朋友們會帶我們忘記拿的帳篷。</div>
+        <div class="calc-workspace">
+          <div class="calc-solution">Don't worry, as either John or his friends are going to bring the tent we forgot.</div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span class="page-badge-footer">句型手冊 ｜ 第 6 / 8 頁</span>
+        <span>GF4 主詞一致 ＆ 小試身手</span>
+      </div>
+    </div>
+
+    <!-- ==================== PAGE 7：實力測驗 語法測驗 1-10 ==================== -->
+    <div class="page" id="page-7">
+      <canvas class="drawing-canvas"></canvas>
+      <div class="page-header">
+        <div class="header-info-group">
+          <span>班級：___________</span>
+          <span>座號：_______</span>
+          <span>姓名：_______________</span>
+        </div>
+        <div class="header-badge">總複習</div>
+      </div>
+      <div class="main-title">Lesson 1: What's in My B.O.B.</div>
+      <div class="sub-title">句型手冊 ｜ 實力測驗：一、語法測驗（每題 2 分，共 20 分）</div>
+
+      <div class="test-banner">
+        <span class="test-title">🏆 實力測驗</span>
+        <span class="test-tag">綜合四大句型（點擊題目揭曉答案）</span>
+      </div>
+
+      <div class="qa-grid-2col">
+        <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+          <div class="qa-bracket">( <span class="ans-slot">D</span> )</div>
+          <div class="qa-content">
+            <div class="qa-stem">1. Theo wasn't in his room, but he left his phone <b>______</b> on the desk.</div>
+            <div class="qa-options">(A) charge &nbsp; (B) is charging &nbsp; (C) to charge &nbsp;<span class="correct-choice">(D) charging</span></div>
+          </div>
+        </div>
+
+        <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+          <div class="qa-bracket">( <span class="ans-slot">C</span> )</div>
+          <div class="qa-content">
+            <div class="qa-stem">2. Not only the students but also their teacher <b>______</b> the food at the school cafeteria.</div>
+            <div class="qa-options">(A) enjoy &nbsp; (B) enjoying &nbsp;<span class="correct-choice">(C) enjoys</span> &nbsp; (D) to enjoy</div>
+          </div>
+        </div>
+
+        <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+          <div class="qa-bracket">( <span class="ans-slot">A</span> )</div>
+          <div class="qa-content">
+            <div class="qa-stem">3. This morning I found milk <b>______</b> all over the floor.<span class="hint-inline">【統 108 年】</span></div>
+            <div class="qa-options"><span class="correct-choice">(A) spilled</span> &nbsp; (B) is spilling &nbsp; (C) spills &nbsp; (D) that spill</div>
+          </div>
+        </div>
+
+        <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+          <div class="qa-bracket">( <span class="ans-slot">D</span> )</div>
+          <div class="qa-content">
+            <div class="qa-stem">4. Everyone at the party began dancing <b>______</b> the music started.</div>
+            <div class="qa-options">(A) as far as &nbsp; (B) as cool as &nbsp; (C) as well as &nbsp;<span class="correct-choice">(D) as soon as</span></div>
+          </div>
+        </div>
+
+        <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+          <div class="qa-bracket">( <span class="ans-slot">B</span> )</div>
+          <div class="qa-content">
+            <div class="qa-stem">5. That old cat either sleeps by the window <b>______</b> lies by the door all day.</div>
+            <div class="qa-options">(A) but &nbsp;<span class="correct-choice">(B) or</span> &nbsp; (C) and &nbsp; (D) so</div>
+          </div>
+        </div>
+
+        <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+          <div class="qa-bracket">( <span class="ans-slot">C</span> )</div>
+          <div class="qa-content">
+            <div class="qa-stem">6. Painting not only helps reduce stress but also <b>______</b> creativity.</div>
+            <div class="qa-options">(A) improvement &nbsp; (B) improving &nbsp;<span class="correct-choice">(C) improves</span> &nbsp; (D) improved</div>
+          </div>
+        </div>
+
+        <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+          <div class="qa-bracket">( <span class="ans-slot">B</span> )</div>
+          <div class="qa-content">
+            <div class="qa-stem">7. To keep the workplace <b>______</b>, the United States passed a law to provide paid sick leave for all employees（員工）.<span class="hint-inline">【統 109 年】</span></div>
+            <div class="qa-options">(A) be safe &nbsp;<span class="correct-choice">(B) safe</span> &nbsp; (C) saves &nbsp; (D) saving</div>
+          </div>
+        </div>
+
+        <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+          <div class="qa-bracket">( <span class="ans-slot">A</span> )</div>
+          <div class="qa-content">
+            <div class="qa-stem">8. As soon as all the students <b>______</b> the school, the gates will be locked.</div>
+            <div class="qa-options"><span class="correct-choice">(A) leave</span> &nbsp; (B) will leave &nbsp; (C) left &nbsp; (D) leaving</div>
+          </div>
+        </div>
+
+        <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+          <div class="qa-bracket">( <span class="ans-slot">C</span> )</div>
+          <div class="qa-content">
+            <div class="qa-stem">9. Either I or my sisters <b>______</b> responsible for cooking dinner tonight.</div>
+            <div class="qa-options">(A) is &nbsp; (B) am &nbsp;<span class="correct-choice">(C) are</span> &nbsp; (D) being</div>
+          </div>
+        </div>
+
+        <div class="qa-block interactive-item" onclick="toggleItemAnswer(this)">
+          <div class="qa-bracket">( <span class="ans-slot">D</span> )</div>
+          <div class="qa-content">
+            <div class="qa-stem">0. This thermos（保溫杯）will <b>______</b> coffee warm for up to eight hours.</div>
+            <div class="qa-options">(A) let &nbsp; (B) find &nbsp; (C) stay &nbsp;<span class="correct-choice">(D) keep</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span class="page-badge-footer">句型手冊 ｜ 第 7 / 8 頁</span>
+        <span>實力測驗：語法測驗</span>
+      </div>
+    </div>
+
+    <!-- ==================== PAGE 8：填充 ＋ 句型練習 ＋ 總評卡 ==================== -->
+    <div class="page" id="page-8">
+      <canvas class="drawing-canvas"></canvas>
+      <div class="page-header">
+        <div class="header-info-group">
+          <span>班級：___________</span>
+          <span>座號：_______</span>
+          <span>姓名：_______________</span>
+        </div>
+        <div class="header-badge">總複習</div>
+      </div>
+      <div class="main-title">Lesson 1: What's in My B.O.B.</div>
+      <div class="sub-title">句型手冊 ｜ 實力測驗：二、填充 ＆ 三、句型練習</div>
+
+      <div class="test-banner">
+        <span class="test-title">🏆 二、填充</span>
+        <span class="test-tag">依中文完成英文句子</span>
+      </div>
+
+      <div class="item-line interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="item-title">1. 地球的引力讓月亮保持圍繞著它移動。<span class="hint-inline">（keep + O + 現在分詞）</span></div>
+        <div class="calc-workspace">
+          <div class="calc-solution">Earth's gravity keeps the moon moving around it.</div>
+        </div>
+      </div>
+
+      <div class="item-line interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="item-title">2. 假以時日，蘭花不僅能裝飾居家，還能豐富臺灣的森林生態系統。<span class="hint-inline">【統 114 年】</span></div>
+        <div class="calc-workspace">
+          <div class="calc-solution">Given time, orchids may not only decorate homes but also enrich Taiwan's forest ecosystem.</div>
+        </div>
+      </div>
+
+      <div class="test-banner">
+        <span class="test-title">🏆 三、句型練習</span>
+        <span class="test-tag">句子重組、改寫、合併</span>
+      </div>
+
+      <div class="item-line interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="item-title"><span class="practice-tag">句子重組</span>either too expensive / these ingredients（食材）/ The chef found / or / not fresh enough</div>
+        <div class="calc-workspace">
+          <div class="calc-solution">The chef found these ingredients either too expensive or not fresh enough.</div>
+        </div>
+      </div>
+
+      <div class="item-line interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="item-title"><span class="practice-tag">句子重組</span>started to shake, / the building / the students / hid under their desks / As soon as</div>
+        <div class="calc-workspace">
+          <div class="calc-solution">As soon as the building started to shake, the students hid under their desks.</div>
+        </div>
+      </div>
+
+      <div class="item-line interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="item-title"><span class="practice-tag">句子重組</span>keeps Max / but also his part-time job / Not only / busy / his schoolwork</div>
+        <div class="calc-workspace">
+          <div class="calc-solution">Not only his schoolwork but also his part-time job keeps Max busy.</div>
+        </div>
+      </div>
+
+      <div class="item-line interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="item-title"><span class="practice-tag">句子改寫</span>The moment Julian saw the car accident, he called the police.<span class="hint-inline">（用 As soon as ... 改寫）</span></div>
+        <div class="calc-workspace">
+          <div class="calc-solution">As soon as Julian saw the car accident, he called the police.</div>
+        </div>
+      </div>
+
+      <div class="item-line interactive-item" onclick="toggleItemAnswer(this)">
+        <div class="item-title"><span class="practice-tag">句子合併</span>Employees of this company can work in the office. Employees of this company can also work from home.<span class="hint-inline">（用 either ... or ... 合併）</span></div>
+        <div class="calc-workspace">
+          <div class="calc-solution">Employees of this company can work either in the office or from home.</div>
+        </div>
+      </div>
+
+      <div class="eval-card">
+        <div class="eval-stars">
+          🏆 實力測驗總評：<br>
+          ⭐⭐⭐⭐⭐ L1 句型達人
+        </div>
+        <div class="stamp-box">
+          訂正完成<br>專用蓋章處
+        </div>
+        <div class="teacher-sign-box">
+          教師簽章：____________<br>
+          評語：句型觀念清楚，應用正確！
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span class="page-badge-footer">句型手冊 ｜ 第 8 / 8 頁</span>
+        <span>實力測驗：填充 ＆ 句型練習</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 互動控制腳本 -->
+  <script>
+    function toggleTocMenu(e) {
+      e.stopPropagation();
+      var menu = document.getElementById('tocMenu');
+      menu.classList.toggle('show');
+    }
+    document.addEventListener('click', function(e) {
+      var menu = document.getElementById('tocMenu');
+      if (!menu.contains(e.target)) menu.classList.remove('show');
+    });
+    function jumpTo(id) {
+      var el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('tocMenu').classList.remove('show');
+    }
+    function toggleItemAnswer(el) {
+      if (document.body.classList.contains('pen-mode')) return;
+      el.classList.toggle('show-one');
+    }
+    var isAllAnsShown = false;
+    function toggleAllAnswers() {
+      isAllAnsShown = !isAllAnsShown;
+      var container = document.querySelector('.pages-container');
+      var btn = document.getElementById('toggleAllAnsBtn');
+      var btnIcon = document.getElementById('ansIcon');
+      if (isAllAnsShown) {
+        container.classList.add('show-ans');
+        btn.classList.add('active');
+        btnIcon.textContent = '🙈';
+      } else {
+        container.classList.remove('show-ans');
+        btn.classList.remove('active');
+        btnIcon.textContent = '👁️';
+        document.querySelectorAll('.show-one').forEach(function(item) {
+          item.classList.remove('show-one');
+        });
+      }
+    }
+    var isPenMode = false;
+    var currentPenColor = 'rgba(250, 204, 21, 0.45)';
+    var currentPenSize = 4;
+    function togglePenMode() {
+      isPenMode = !isPenMode;
+      document.body.classList.toggle('pen-mode', isPenMode);
+      var btn = document.getElementById('penBtn');
+      btn.classList.toggle('active', isPenMode);
+      document.getElementById('penOptions').classList.toggle('show', isPenMode);
+    }
+    function setPenColor(color, el) {
+      currentPenColor = color;
+      document.querySelectorAll('.color-dot').forEach(function(d) { d.classList.remove('active'); });
+      el.classList.add('active');
+    }
+    function setPenSize(size, el) {
+      currentPenSize = size;
+      document.querySelectorAll('.size-btn').forEach(function(b) { b.classList.remove('active'); });
+      el.classList.add('active');
+    }
+    function initCanvases() {
+      document.querySelectorAll('.drawing-canvas').forEach(function(canvas) {
+        var ctx = canvas.getContext('2d');
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        var rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        var isDrawing = false;
+        var lastX = 0, lastY = 0;
+        function getPos(e) {
+          var r = canvas.getBoundingClientRect();
+          if (e.touches && e.touches.length) {
+            return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top };
+          }
+          return { x: e.clientX - r.left, y: e.clientY - r.top };
+        }
+        if (window.PointerEvent) {
+          canvas.addEventListener('pointerdown', function(e) {
+            if (!isPenMode) return;
+            isDrawing = true;
+            var pos = getPos(e);
+            lastX = pos.x; lastY = pos.y;
+            canvas.setPointerCapture(e.pointerId);
+          });
+          canvas.addEventListener('pointermove', function(e) {
+            if (!isDrawing || !isPenMode) return;
+            var pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.strokeStyle = currentPenColor;
+            ctx.lineWidth = currentPenSize;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+            lastX = pos.x; lastY = pos.y;
+            e.preventDefault();
+          });
+          canvas.addEventListener('pointerup', function(e) {
+            isDrawing = false;
+            try { canvas.releasePointerCapture(e.pointerId); } catch(err) {}
+          });
+          canvas.addEventListener('pointercancel', function() { isDrawing = false; });
+        } else {
+          canvas.addEventListener('mousedown', function(e) {
+            if (!isPenMode) return;
+            isDrawing = true;
+            var pos = getPos(e);
+            lastX = pos.x; lastY = pos.y;
+          });
+          canvas.addEventListener('mousemove', function(e) {
+            if (!isDrawing || !isPenMode) return;
+            var pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.strokeStyle = currentPenColor;
+            ctx.lineWidth = currentPenSize;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+            lastX = pos.x; lastY = pos.y;
+          });
+          window.addEventListener('mouseup', function() { isDrawing = false; });
+          canvas.addEventListener('touchstart', function(e) {
+            if (!isPenMode) return;
+            isDrawing = true;
+            var pos = getPos(e);
+            lastX = pos.x; lastY = pos.y;
+            e.preventDefault();
+          }, { passive: false });
+          canvas.addEventListener('touchmove', function(e) {
+            if (!isDrawing || !isPenMode) return;
+            var pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.strokeStyle = currentPenColor;
+            ctx.lineWidth = currentPenSize;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+            lastX = pos.x; lastY = pos.y;
+            e.preventDefault();
+          }, { passive: false });
+          canvas.addEventListener('touchend', function() { isDrawing = false; });
+          canvas.addEventListener('touchcancel', function() { isDrawing = false; });
+        }
+      });
+    }
+    window.addEventListener('load', initCanvases);
+    window.addEventListener('resize', initCanvases);
+
+    function clearAllDrawings() {
+      document.querySelectorAll('.drawing-canvas').forEach(function(canvas) {
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
+    }
+
+    function smartPrint() {
+      window.print();
+    }
+  </script>
+</body>
+</html>
