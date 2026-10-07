@@ -1,0 +1,2508 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>翰林技高英語 Choice 3 聽力與會話互動測驗 (L1 & L2)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --primary-light: #e0e7ff;
+      --primary-dark: #3730a3;
+      --accent: #8b5cf6;
+      --bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-sub: #94a3b8;
+      --border-color: #e2e8f0;
+      --player-bg: #0f172a;
+      --player-text: #f8fafc;
+      --success: #10b981;
+      --success-bg: #ecfdf5;
+      --warning: #f59e0b;
+      --warning-bg: #fef3c7;
+      --danger: #ef4444;
+      --danger-bg: #fef2f2;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 90px;
+    }
+
+    /* Top Navigation Bar */
+    header.top-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+      flex-shrink: 0;
+    }
+
+    .brand-text h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .brand-text p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .unit-tabs {
+      display: flex;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 10px;
+      gap: 2px;
+    }
+
+    .unit-tab {
+      padding: 6px 14px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .unit-tab:hover {
+      color: var(--text-main);
+    }
+
+    .unit-tab.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .mode-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: #334155;
+      transition: all 0.2s;
+    }
+
+    .mode-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .mode-btn.active-key {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #b45309;
+      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
+    }
+
+    .settings-nav-btn {
+      background: #f1f5f9;
+      border: 1px solid var(--border-color);
+      color: #475569;
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .settings-nav-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    /* Student Info Bar */
+    .student-bar-wrapper {
+      max-width: 1100px;
+      margin: 14px auto 0;
+      padding: 0 16px;
+    }
+
+    .student-info-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .student-fields {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .info-label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .info-input {
+      padding: 6px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #1e293b;
+      outline: none;
+      transition: all 0.15s;
+    }
+
+    .info-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    .info-input.input-error {
+      border-color: #ef4444;
+      background: #fef2f2;
+      animation: shake 0.3s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+
+    .timer-badge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #475569;
+      background: #f8fafc;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .timer-val {
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* Main Container */
+    main.main-content {
+      max-width: 1100px;
+      margin: 16px auto;
+      padding: 0 16px;
+    }
+
+    /* Sticky Dark Audio Player Bar */
+    .player-wrapper {
+      position: sticky;
+      top: 68px;
+      z-index: 40;
+      margin-bottom: 22px;
+    }
+
+    .dark-player {
+      background: var(--player-bg);
+      color: var(--player-text);
+      border-radius: 16px;
+      padding: 14px 20px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.4), 0 8px 10px -6px rgba(15, 23, 42, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .player-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .track-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 240px;
+    }
+
+    .speaker-icon {
+      color: #a5b4fc;
+      display: flex;
+      align-items: center;
+    }
+
+    .track-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #f8fafc;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 360px;
+    }
+
+    .time-badge {
+      font-size: 0.82rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ctrl-btn {
+      background: transparent;
+      border: none;
+      color: #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    .ctrl-btn.play-pause-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .ctrl-btn.play-pause-btn:hover {
+      background: var(--primary-hover);
+      transform: scale(1.05);
+    }
+
+    .speed-select {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #f1f5f9;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .speed-select option {
+      background: #1e293b;
+      color: white;
+    }
+
+    .player-scrubber-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .scrubber-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: #334155;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .scrubber-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #818cf8;
+      border: 2px solid #ffffff;
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(129, 140, 248, 0.8);
+      transition: transform 0.1s;
+    }
+
+    .scrubber-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+    }
+
+    /* Module Section Containers */
+    .module-view {
+      display: none;
+    }
+
+    .module-view.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Card */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .section-header-bar {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fafafa;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-badge {
+      background: #eef2ff;
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .section-tip {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Picture / Illustration Card */
+    .illustration-card {
+      padding: 24px;
+      text-align: center;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .img-wrapper {
+      display: inline-block;
+      position: relative;
+      cursor: zoom-in;
+      max-width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border-color);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .img-wrapper:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .img-wrapper img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      max-height: 480px;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    .zoom-hint {
+      margin-top: 10px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      font-weight: 700;
+      transition: all 0.15s;
+    }
+
+    .zoom-hint:hover {
+      background: #f1f5f9;
+      color: var(--primary);
+      border-color: #94a3b8;
+    }
+
+    /* Strategy / Word Preview Box */
+    .strategy-box {
+      margin: 18px 22px;
+      padding: 16px 20px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      color: #166534;
+    }
+
+    .strategy-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .strategy-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .strategy-chip {
+      background: #ffffff;
+      border: 1px solid #86efac;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #15803d;
+    }
+
+    /* Question Container */
+    .question-list {
+      padding: 12px 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .question-item {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px 22px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .question-item:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .question-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .q-number-title {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.5;
+    }
+
+    .q-audio-jump-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: #ede9fe;
+      color: #6d28d9;
+      border: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .q-audio-jump-btn:hover {
+      background: #ddd6fe;
+      transform: translateY(-1px);
+    }
+
+    /* Options Grid (Screenshot Style: Large rounded buttons) */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-btn {
+      background: #ffffff;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #374151;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+      transition: all 0.15s ease;
+      min-height: 54px;
+      line-height: 1.35;
+    }
+
+    .option-btn:hover {
+      background: #f9fafb;
+      border-color: #9ca3af;
+      transform: translateY(-1px);
+    }
+
+    .option-btn.selected {
+      background: #eef2ff;
+      border-color: var(--primary);
+      color: var(--primary-dark);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+    }
+
+    /* Answer Key Mode styling */
+    .answer-key-mode .option-btn.is-correct {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25) !important;
+      font-weight: 800;
+    }
+
+    .answer-key-mode .option-btn.selected:not(.is-correct) {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+
+    /* Detailed Explanation Panel */
+    .explanation-panel {
+      display: none;
+      margin-top: 16px;
+      padding: 16px 18px;
+      background: #f8fafc;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+      font-size: 0.88rem;
+    }
+
+    .answer-key-mode .explanation-panel {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .exp-header {
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .exp-transcript {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin: 8px 0;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    .exp-translation {
+      color: #475569;
+      margin: 6px 0;
+      font-size: 0.86rem;
+    }
+
+    .exp-detail {
+      color: #0369a1;
+      background: #f0f9ff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* Interactive Ordering Puzzle (For L1 Listening Ordering Task) */
+    .ordering-card {
+      background: #faf5ff;
+      border: 1px solid #e9d5ff;
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 18px;
+    }
+
+    .ordering-title {
+      font-weight: 800;
+      color: #6b21a8;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .order-slots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .order-slot {
+      width: 78px;
+      height: 56px;
+      background: #ffffff;
+      border: 2px dashed #c084fc;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #7e22ce;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.15s;
+    }
+
+    .order-slot .slot-label {
+      font-size: 0.65rem;
+      color: #a855f7;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .order-slot.filled {
+      border: 2px solid #9333ea;
+      background: #f3e8ff;
+    }
+
+    .order-arrow {
+      color: #a855f7;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .order-pick-pool {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .order-pick-btn {
+      padding: 10px 16px;
+      background: #ffffff;
+      border: 1px solid #d8b4fe;
+      color: #6b21a8;
+      font-weight: 800;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      transition: all 0.15s;
+    }
+
+    .order-pick-btn:hover {
+      background: #f5f3ff;
+      border-color: #a855f7;
+      transform: translateY(-1px);
+    }
+
+    .order-pick-btn.used {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .ordering-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .mini-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+    }
+
+    .mini-btn.primary {
+      background: #7c3aed;
+      color: white;
+    }
+    .mini-btn.primary:hover { background: #6d28d9; }
+
+    .mini-btn.secondary {
+      background: #e2e8f0;
+      color: #475569;
+    }
+    .mini-btn.secondary:hover { background: #cbd5e1; }
+
+    /* Bottom Score Submission Bar */
+    .submit-bar {
+      margin-top: 32px;
+      padding: 26px 20px;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: white;
+      font-size: 1.12rem;
+      font-weight: 800;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(79, 70, 229, 0.4);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.5);
+    }
+
+    .submit-status-msg {
+      margin-top: 14px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .submit-backup-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .backup-btn {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .backup-btn:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .score-result-box {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 14px;
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+    }
+
+    .score-result-box.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .score-number {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .score-comment {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #3730a3;
+      margin-top: 4px;
+    }
+
+    /* Modal dialogs */
+    .custom-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      z-index: 120;
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .custom-modal.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .modal-close-x {
+      background: transparent;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #64748b;
+    }
+
+    .modal-body {
+      font-size: 0.9rem;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.88);
+      z-index: 100;
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .lightbox-close-btn {
+      position: absolute;
+      top: -46px;
+      right: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      font-size: 1.6rem;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .lightbox-close-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .nav-container {
+        padding: 10px 14px;
+      }
+      .brand-text h1 {
+        font-size: 1.02rem;
+      }
+      .student-info-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .student-fields {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .player-top-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .player-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <div class="brand-section">
+        <div class="logo-badge">🎧</div>
+        <div class="brand-text">
+          <h1>翰林技高英語 Choice 3 聽力與會話互動測驗</h1>
+          <p>B3L1 & B3L2 Listening & Conversation Interactive Practice</p>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <div class="unit-tabs">
+          <button class="unit-tab active" onclick="switchModule('l1-listening')">L1 聽力</button>
+          <button class="unit-tab" onclick="switchModule('l1-conversation')">L1 會話</button>
+          <button class="unit-tab" onclick="switchModule('l2-listening')">L2 聽力</button>
+          <button class="unit-tab" onclick="switchModule('l2-conversation')">L2 會話</button>
+        </div>
+
+        <button id="modeToggleBtn" class="mode-btn" onclick="toggleAnswerKeyMode()">
+          <span>🔑</span> 解答模式
+        </button>
+
+        <button class="settings-nav-btn" onclick="openSettingsModal()" title="設定 Google 試算表同步網址">
+          <span>⚙️</span> 試算表設定
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Student Info & Practice Timer Bar -->
+  <div class="student-bar-wrapper">
+    <div class="student-info-card">
+      <div class="student-fields">
+        <span class="info-label">🏫 班級：</span>
+        <input type="text" id="studentClass" placeholder="如：綜二甲 / 資二1" class="info-input" style="width: 130px;" onchange="saveStudentInfo()">
+
+        <span class="info-label" style="margin-left: 6px;">🔢 座號：</span>
+        <input type="number" id="studentSeat" placeholder="座號" min="1" max="55" class="info-input" style="width: 75px;" onchange="saveStudentInfo()">
+
+        <span class="info-label" style="margin-left: 6px;">👤 姓名：</span>
+        <input type="text" id="studentName" placeholder="學生姓名" class="info-input" style="width: 120px;" onchange="saveStudentInfo()">
+      </div>
+
+      <div class="timer-badge-wrap">
+        <span>⏱️ 練習計時：</span>
+        <span id="examTimer" class="timer-val">00:00</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="main-content">
+
+    <!-- Sticky Dark Audio Player Bar (Modeled after screenshot) -->
+    <div class="player-wrapper">
+      <div class="dark-player">
+        <div class="player-top-row">
+          <div class="track-meta">
+            <span class="speaker-icon">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zm-2.5 0L6.5 7.5H3v9h3.5l5 4.27V3.23zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+              </svg>
+            </span>
+            <span id="playerTrackTitle" class="track-title">L1 官方測驗音檔 (Listening for Process)</span>
+            <span id="playerTimeBadge" class="time-badge">00:00 / 01:25</span>
+          </div>
+
+          <div class="player-controls">
+            <button class="ctrl-btn" onclick="replayAudio()" title="重聽目前題目或倒轉 5 秒">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+              重聽
+            </button>
+            <button class="ctrl-btn" onclick="prevTrack()" title="上一首音檔">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+            </button>
+            <button id="playPauseBtn" class="ctrl-btn play-pause-btn" onclick="togglePlayPause()" title="播放 / 暫停">
+              <svg id="playIcon" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg id="pauseIcon" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <button class="ctrl-btn" onclick="nextTrack()" title="下一首音檔">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+            </button>
+            <select id="speedSelect" class="speed-select" onchange="changePlaybackSpeed(this.value)">
+              <option value="0.75">0.75x</option>
+              <option value="0.85">0.85x</option>
+              <option value="1.0" selected>1.0x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="player-scrubber-row">
+          <input type="range" id="audioScrubber" class="scrubber-slider" min="0" max="100" value="0" oninput="seekAudio(this.value)">
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden Native Audio Element -->
+    <audio id="mainAudio" preload="auto"></audio>
+
+    <!-- ========================================== -->
+    <!-- MODULE 1: L1 LISTENING                     -->
+    <!-- ========================================== -->
+    <div id="mod-l1-listening" class="module-view active">
+      <div class="section-card">
+        <div class="section-header-bar">
+          <div class="section-title-wrap">
+            <span class="section-badge">L1 LISTENING</span>
+            <h2 class="section-title">一、看圖聽力測驗：地震避難流程 (Process in Order)</h2>
+          </div>
+          <span class="section-tip">仔細看圖並聽音檔作答</span>
+        </div>
+
+        <!-- Strategy Box -->
+        <div class="strategy-box">
+          <div class="strategy-title">
+            <span>💡 聽力關鍵策略：Listening for Process in Order (依副詞掌握事件順序)</span>
+          </div>
+          <p style="font-size: 0.85rem; color: #166534;">
+            我們可以根據常見的時間副詞判斷事件先後順序：
+          </p>
+          <div class="strategy-chips">
+            <span class="strategy-chip">順序：firstly / secondly / thirdly</span>
+            <span class="strategy-chip">之前：previously / beforehand</span>
+            <span class="strategy-chip">接著：then / next / after that</span>
+            <span class="strategy-chip">最終：lastly / finally</span>
+          </div>
+        </div>
+
+        <!-- Main Task Illustration -->
+        <div class="illustration-card">
+          <div class="img-wrapper" onclick="openLightbox('assets/l1_listening_ordering_task.png')">
+            <img src="assets/l1_listening_ordering_task.png" alt="L1 地震避難順序圖 (A)~(E)">
+          </div>
+          <div class="zoom-hint" onclick="openLightbox('assets/l1_listening_ordering_task.png')">
+            🔍 點選圖片可放大檢視 (A)~(E) 避難流程圖
+          </div>
+
+          <!-- Interactive Ordering Puzzle -->
+          <div class="ordering-card">
+            <div class="ordering-title">
+              <span>🧩 第 1 題：請依聽力內容，排列 (A)~(E) 之正確地震避難順序</span>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(43)">
+                🎧 聆聽短文 (00:43)
+              </button>
+            </div>
+            <div class="order-slots">
+              <div class="order-slot" id="slot-0" onclick="removeOrderPick(0)">
+                <span class="slot-label">1st</span>
+                <span id="slot-val-0">?</span>
+              </div>
+              <span class="order-arrow">→</span>
+              <div class="order-slot" id="slot-1" onclick="removeOrderPick(1)">
+                <span class="slot-label">2nd</span>
+                <span id="slot-val-1">?</span>
+              </div>
+              <span class="order-arrow">→</span>
+              <div class="order-slot" id="slot-2" onclick="removeOrderPick(2)">
+                <span class="slot-label">3rd</span>
+                <span id="slot-val-2">?</span>
+              </div>
+              <span class="order-arrow">→</span>
+              <div class="order-slot" id="slot-3" onclick="removeOrderPick(3)">
+                <span class="slot-label">4th</span>
+                <span id="slot-val-3">?</span>
+              </div>
+              <span class="order-arrow">→</span>
+              <div class="order-slot" id="slot-4" onclick="removeOrderPick(4)">
+                <span class="slot-label">5th</span>
+                <span id="slot-val-4">?</span>
+              </div>
+            </div>
+
+            <div class="order-pick-pool" id="orderPickPool">
+              <button class="order-pick-btn" onclick="pickLetter('A')">(A) 抓穩桌子家具</button>
+              <button class="order-pick-btn" onclick="pickLetter('B')">(B) 往空曠處避難</button>
+              <button class="order-pick-btn" onclick="pickLetter('C')">(C) 趴下四肢著地</button>
+              <button class="order-pick-btn" onclick="pickLetter('D')">(D) 拿取防災包</button>
+              <button class="order-pick-btn" onclick="pickLetter('E')">(E) 爬到堅固桌下掩護</button>
+            </div>
+
+            <div class="ordering-actions">
+              <button class="mini-btn secondary" onclick="resetOrder()">重設排序</button>
+              <button class="mini-btn primary" onclick="checkOrder()">檢查排序答案</button>
+            </div>
+
+            <div id="orderResultMsg" style="margin-top: 12px; font-weight: bold; font-size: 0.92rem;"></div>
+          </div>
+        </div>
+
+        <!-- Question List -->
+        <div class="question-list">
+
+          <!-- Q2 -->
+          <div class="question-item" data-qid="l1-q2" data-correct="B">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 2 題 (單選) According to the talk, what should you do FIRST when an earthquake strikes?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(43)">
+                🎧 聆聽此段 (00:43)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l1-q2', 'A')">(A) Grab your bug-out bag</button>
+              <button class="option-btn" onclick="selectOption('l1-q2', 'B')">(B) Drop down to hands & knees</button>
+              <button class="option-btn" onclick="selectOption('l1-q2', 'C')">(C) Run quickly to the exit</button>
+              <button class="option-btn" onclick="selectOption('l1-q2', 'D')">(D) Call 119 immediately</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Speaker:</strong> "When an earthquake happens, you should take immediate action to ensure your safety. <strong>Firstly, drop down to your hands and knees.</strong>"
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>地震發生時，應立即採取行動確保自身安全。<strong>首先，手與膝著地趴下。</strong>
+              </div>
+              <div class="exp-detail">
+                <strong>解析：</strong>依聽力時序關鍵字 "Firstly"（首先），可知首要動作為 (B) Drop down to your hands and knees（趴下，手與膝著地）。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-item" data-qid="l1-q3" data-correct="C">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 3 題 (單選) Why does the speaker suggest dropping down to your hands and knees?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(54)">
+                🎧 聆聽此段 (00:54)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l1-q3', 'A')">(A) To look for dropped items</button>
+              <button class="option-btn" onclick="selectOption('l1-q3', 'B')">(B) It makes you run faster</button>
+              <button class="option-btn" onclick="selectOption('l1-q3', 'C')">(C) It provides stability & crawling</button>
+              <button class="option-btn" onclick="selectOption('l1-q3', 'D')">(D) It stops the building shaking</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Speaker:</strong> "This position <strong>provides stability and allows you to crawl to a safer location</strong>."
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>這個姿勢可以<strong>保持身體穩定，並能爬到較安全的地方</strong>。
+              </div>
+              <div class="exp-detail">
+                <strong>解析：</strong>聽力講述趴下姿勢能提供 stability（穩定性）並能 crawl（爬行），故選 (C)。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="question-item" data-qid="l1-q4" data-correct="C">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 4 題 (單選) When should you grab your bug-out bag?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(70)">
+                🎧 聆聽此段 (01:10)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l1-q4', 'A')">(A) While floor is violently shaking</button>
+              <button class="option-btn" onclick="selectOption('l1-q4', 'B')">(B) Before taking cover under desk</button>
+              <button class="option-btn" onclick="selectOption('l1-q4', 'C')">(C) After shaking stops, if evacuating</button>
+              <button class="option-btn" onclick="selectOption('l1-q4', 'D')">(D) As soon as the alarm sounds</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Speaker:</strong> "Next, hold on to the furniture until the shaking stops. <strong>After that, if it is necessary to leave the building, grab your bug-out bag before moving to an open area.</strong>"
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>接著，抓住家具直到搖晃停止。<strong>之後，如果有必要離開建築物，請在前往空曠區域前帶上你的防災包。</strong>
+              </div>
+              <div class="exp-detail">
+                <strong>解析：</strong>搖晃停止且確認需要撤離建築物時，才拿取防災包 (bug-out bag)，故選 (C)。
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODULE 2: L1 CONVERSATION                  -->
+    <!-- ========================================== -->
+    <div id="mod-l1-conversation" class="module-view">
+      <div class="section-card">
+        <div class="section-header-bar">
+          <div class="section-title-wrap">
+            <span class="section-badge">L1 CONVERSATION</span>
+            <h2 class="section-title">二、會話與口說情境測驗：地震來襲 (When an Earthquake Happens)</h2>
+          </div>
+          <span class="section-tip">仔細看對話漫畫並聽音檔作答</span>
+        </div>
+
+        <!-- Comic Illustrations -->
+        <div class="illustration-card">
+          <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+            <div class="img-wrapper" style="max-width: 48%;" onclick="openLightbox('assets/l1_conversation_comic1.png')">
+              <img src="assets/l1_conversation_comic1.png" alt="L1 會話漫畫 Part 1">
+            </div>
+            <div class="img-wrapper" style="max-width: 48%;" onclick="openLightbox('assets/l1_conversation_comic2.png')">
+              <img src="assets/l1_conversation_comic2.png" alt="L1 會話漫畫 Part 2">
+            </div>
+          </div>
+          <div class="zoom-hint" onclick="openLightbox('assets/l1_conversation_comic1.png')">
+            🔍 點選圖片可放大檢視課本對話漫畫 (Peter & Christy)
+          </div>
+        </div>
+
+        <!-- Question List -->
+        <div class="question-list">
+
+          <!-- Q1 -->
+          <div class="question-item" data-qid="l1c-q1" data-correct="B">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 1 題 (單選) Where are Peter and Christy when the earthquake strikes?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(2)">
+                🎧 聆聽對話 (00:02)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l1c-q1', 'A')">(A) In school cafeteria</button>
+              <button class="option-btn" onclick="selectOption('l1c-q1', 'B')">(B) In their classroom</button>
+              <button class="option-btn" onclick="selectOption('l1c-q1', 'C')">(C) On the sports field</button>
+              <button class="option-btn" onclick="selectOption('l1c-q1', 'D')">(D) At a subway station</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Narration:</strong> "Peter and Christy are in their classroom, and an earthquake happens."
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>Peter 和 Christy 正在教室裡，地震來襲。故選 (B)。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-item" data-qid="l1c-q2" data-correct="C">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 2 題 (單選) What does Christy say when Peter is terrified?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(15)">
+                🎧 聆聽此段 (00:15)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l1c-q2', 'A')">(A) "Let's shout for help!"</button>
+              <button class="option-btn" onclick="selectOption('l1c-q2', 'B')">(B) "Run to the hallway!"</button>
+              <button class="option-btn" onclick="selectOption('l1c-q2', 'C')">(C) "Take a deep breath & calm down"</button>
+              <button class="option-btn" onclick="selectOption('l1c-q2', 'D')">(D) "Call your family right now"</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Christy:</strong> "Take a deep breath. It's just an earthquake... Calm down. Follow the SOP. Stay under your desk until it's over."
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>深呼吸。不過就是地震而已……冷靜。照著標準程序走。躲到桌子下面直到地震停止。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-item" data-qid="l1c-q3" data-correct="A">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 3 題 (單選) What does Christy mean when she says "Hold your horses"?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(33)">
+                🎧 聆聽此段 (00:33)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l1c-q3', 'A')">(A) Slow down and don't rush</button>
+              <button class="option-btn" onclick="selectOption('l1c-q3', 'B')">(B) Take care of real horses</button>
+              <button class="option-btn" onclick="selectOption('l1c-q3', 'C')">(C) Run as fast as a horse</button>
+              <button class="option-btn" onclick="selectOption('l1c-q3', 'D')">(D) Hold on to the desk legs</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Peter:</strong> "It stopped. Should we run?"<br>
+                <strong>Christy:</strong> "<strong>Hold your horses.</strong> Use your bag to cover your head. We should go outside to the sports field, but there's no need to run."
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>"Hold your horses" 為常用口語慣用語，意思是「稍安勿躁、且慢、不要急著跑」，故選 (A)。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q4: Speaking Practice 1 -->
+          <div class="question-item" data-qid="l1c-q4" data-correct="C">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 4 題 (課本 Speaking Practice 1, p.28)<br>
+                <span style="font-weight: 500; font-size: 0.9rem;">
+                  Scott: Mom, Toby invited me to his house. I'll be back before dinner.<br>
+                  Mom: <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> Did you finish your homework?<br>
+                  Scott: I did. Also, I cleaned my room and fed the dog. Can I go now?<br>
+                  Mom: That's great. Go ahead!
+                </span>
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(50)">
+                🎧 聆聽 Speaking Tips (00:50)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l1c-q4', 'A')">(A) You must be terrified</button>
+              <button class="option-btn" onclick="selectOption('l1c-q4', 'B')">(B) Holy cow!</button>
+              <button class="option-btn" onclick="selectOption('l1c-q4', 'C')">(C) Hold your horses</button>
+              <button class="option-btn" onclick="selectOption('l1c-q4', 'D')">(D) Let's run!</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析</div>
+              <div class="exp-detail">
+                <strong>解析：</strong>媽媽要求兒子「等一下、別急著跑出門」，先確認功課做完了沒，應用 (C) Hold your horses.（稍安勿躁/且慢）。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q5: Speaking Practice 2 -->
+          <div class="question-item" data-qid="l1c-q5" data-correct="C">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 5 題 (課本 Speaking Practice 2, p.28)<br>
+                <span style="font-weight: 500; font-size: 0.9rem;">
+                  Olivia: Where are you going? Don't you know PE class was switched with Chinese class today?<br>
+                  Paula: <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> I totally forgot about that!<br>
+                  Olivia: I guess you didn't remember to bring your books, either.<br>
+                  Paula: What should I do?
+                </span>
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(54)">
+                🎧 聆聽驚訝用語 (00:54)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l1c-q5', 'A')">(A) Follow the SOP</button>
+              <button class="option-btn" onclick="selectOption('l1c-q5', 'B')">(B) Take a deep breath</button>
+              <button class="option-btn" onclick="selectOption('l1c-q5', 'C')">(C) Oh, my!</button>
+              <button class="option-btn" onclick="selectOption('l1c-q5', 'D')">(D) Calm down</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析</div>
+              <div class="exp-detail">
+                <strong>解析：</strong>Paula 驚覺自己完全忘記調課這件事，表達震驚驚呼「我的天哪！」，依課本 Speaking Tips 應選 (C) Oh, my!。
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODULE 3: L2 LISTENING                     -->
+    <!-- ========================================== -->
+    <div id="mod-l2-listening" class="module-view">
+      <div class="section-card">
+        <div class="section-header-bar">
+          <div class="section-title-wrap">
+            <span class="section-badge">L2 LISTENING</span>
+            <h2 class="section-title">三、因果關係聽力測驗：房間色彩與心理 (Cause and Effect)</h2>
+          </div>
+          <span class="section-tip">仔細聽對話中的因果訊號詞作答</span>
+        </div>
+
+        <!-- Strategy Box -->
+        <div class="strategy-box">
+          <div class="strategy-title">
+            <span>💡 聽力關鍵策略：Listening for Cause and Effect (因果訊號詞)</span>
+          </div>
+          <p style="font-size: 0.85rem; color: #166534;">
+            聽力中的「路標」詞彙能暗示接下來要表達的是原因還是結果：
+          </p>
+          <div class="strategy-chips">
+            <span class="strategy-chip">原因 (Cause) + N/V-ing：because of / due to / as a result of / thanks to</span>
+            <span class="strategy-chip">原因 (Cause) + S+V：because / since / that's because</span>
+            <span class="strategy-chip">結果 (Effect) + S+V：therefore / as a result / thus / so / that's why</span>
+          </div>
+        </div>
+
+        <div class="illustration-card">
+          <div class="img-wrapper" onclick="openLightbox('assets/l2_listening_strategy.png')">
+            <img src="assets/l2_listening_strategy.png" alt="L2 因果關係策略圖表">
+          </div>
+          <div class="zoom-hint" onclick="openLightbox('assets/l2_listening_strategy.png')">
+            🔍 點選圖片可放大檢視課本因果訊號詞圖表 (p.49)
+          </div>
+        </div>
+
+        <!-- Question List -->
+        <div class="question-list">
+
+          <!-- Q1: 課本官方題 1 -->
+          <div class="question-item" data-qid="l2-q1" data-correct="D">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 1 題 (課本原題 1) Why does the man like a white room?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(73)">
+                🎧 聆聽此題 (01:13)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l2-q1', 'A')">(A) It feels fresh.</button>
+              <button class="option-btn" onclick="selectOption('l2-q1', 'B')">(B) It feels peaceful.</button>
+              <button class="option-btn" onclick="selectOption('l2-q1', 'C')">(C) It feels clean.</button>
+              <button class="option-btn" onclick="selectOption('l2-q1', 'D')">(D) It feels bigger.</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Man:</strong> "That's interesting. I prefer white, <strong>since it can make a room look bigger</strong>."
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>真有意思。我比較喜歡白色，<strong>因為白色能讓室內空間看起來比較大</strong>。
+              </div>
+              <div class="exp-detail">
+                <strong>解析：</strong>男士使用原因連接詞 "since"（因為）引出理由 "it can make a room look bigger"，故選 (D)。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q2: 課本官方題 2 -->
+          <div class="question-item" data-qid="l2-q2" data-correct="B">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 2 題 (課本原題 2) What color do the speakers decide to use for their living room in the end?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(86)">
+                🎧 聆聽結論 (01:26)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l2-q2', 'A')">(A) Green.</button>
+              <button class="option-btn" onclick="selectOption('l2-q2', 'B')">(B) Blue.</button>
+              <button class="option-btn" onclick="selectOption('l2-q2', 'C')">(C) White.</button>
+              <button class="option-btn" onclick="selectOption('l2-q2', 'D')">(D) None of the above.</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Woman:</strong> "Green does feel fresh, but it doesn't match the color of our sofas. <strong>So, let's go with blue for the living room walls.</strong>"<br>
+                <strong>Man:</strong> "All right. You're the boss."
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>綠色確實感覺很清新，但跟我們沙發的顏色不搭。<strong>所以，客廳牆壁我們還是選藍色吧。</strong> / 男：好吧，妳說了算。
+              </div>
+              <div class="exp-detail">
+                <strong>解析：</strong>女士用結果訊號詞 "So" 做出最後決定選藍色，男士表示同意，故選 (B)。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3: 進階因果理解 -->
+          <div class="question-item" data-qid="l2-q3" data-correct="B">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 3 題 (進階因果題) Why does the woman NOT want to paint the walls white?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(78)">
+                🎧 聆聽此段 (01:18)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l2-q3', 'A')">(A) It is too bright for eyes</button>
+              <button class="option-btn" onclick="selectOption('l2-q3', 'B')">(B) White gets dirty easily</button>
+              <button class="option-btn" onclick="selectOption('l2-q3', 'C')">(C) White paint is expensive</button>
+              <button class="option-btn" onclick="selectOption('l2-q3', 'D')">(D) It makes room look dark</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Woman:</strong> "<strong>White gets dirty easily. That's why I've never used it.</strong>"
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>白色很容易髒耶。這就是為什麼我從來沒用過白色。故選 (B)。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q4: 進階理解 -->
+          <div class="question-item" data-qid="l2-q4" data-correct="A">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 4 題 (進階因果題) Why do the speakers decide against choosing green?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(86)">
+                🎧 聆聽此段 (01:26)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l2-q4', 'A')">(A) It doesn't match sofas</button>
+              <button class="option-btn" onclick="selectOption('l2-q4', 'B')">(B) It feels depressing</button>
+              <button class="option-btn" onclick="selectOption('l2-q4', 'C')">(C) Green paint has an odor</button>
+              <button class="option-btn" onclick="selectOption('l2-q4', 'D')">(D) The store ran out of green</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Woman:</strong> "Green does feel fresh, <strong>but it doesn't match the color of our sofas</strong>."
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>綠色確實很清新，但跟我們沙發的顏色不搭。故選 (A)。
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODULE 4: L2 CONVERSATION                  -->
+    <!-- ========================================== -->
+    <div id="mod-l2-conversation" class="module-view">
+      <div class="section-card">
+        <div class="section-header-bar">
+          <div class="section-title-wrap">
+            <span class="section-badge">L2 CONVERSATION</span>
+            <h2 class="section-title">四、生活會話測驗：計程車的顏色 (The Colors of Taxis)</h2>
+          </div>
+          <span class="section-tip">仔細看對話漫畫並聽音檔作答</span>
+        </div>
+
+        <!-- Comic Illustrations -->
+        <div class="illustration-card">
+          <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+            <div class="img-wrapper" style="max-width: 48%;" onclick="openLightbox('assets/l2_conversation_comic1.png')">
+              <img src="assets/l2_conversation_comic1.png" alt="L2 會話漫畫 Part 1">
+            </div>
+            <div class="img-wrapper" style="max-width: 48%;" onclick="openLightbox('assets/l2_conversation_comic2.png')">
+              <img src="assets/l2_conversation_comic2.png" alt="L2 會話漫畫 Part 2">
+            </div>
+          </div>
+          <div class="zoom-hint" onclick="openLightbox('assets/l2_conversation_comic1.png')">
+            🔍 點選圖片可放大檢視課本對話漫畫 (Leon & Eunice)
+          </div>
+        </div>
+
+        <!-- Question List -->
+        <div class="question-list">
+
+          <!-- Q1 -->
+          <div class="question-item" data-qid="l2c-q1" data-correct="B">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 1 題 (單選) Why are regular taxis in Taiwan painted yellow?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(15)">
+                🎧 聆聽此段 (00:15)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l2c-q1', 'A')">(A) Yellow paint is cheapest</button>
+              <button class="option-btn" onclick="selectOption('l2c-q1', 'B')">(B) Easy to see from distance</button>
+              <button class="option-btn" onclick="selectOption('l2c-q1', 'C')">(C) It represents royal power</button>
+              <button class="option-btn" onclick="selectOption('l2c-q1', 'D')">(D) Taiwanese drivers like it</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Eunice:</strong> "Most of them. Regular taxis are painted yellow. <strong>It's probably because yellow is very easy to see from a distance.</strong>"
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>大部分是。一般計程車漆成黃色。這可能是因為黃色從遠處看非常顯眼。故選 (B)。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-item" data-qid="l2c-q2" data-correct="A">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 2 題 (單選) Why were London cabs traditionally painted black?
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(36)">
+                🎧 聆聽此段 (00:36)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l2c-q2', 'A')">(A) Black paint was cheapest option</button>
+              <button class="option-btn" onclick="selectOption('l2c-q2', 'B')">(B) Required by British Royal law</button>
+              <button class="option-btn" onclick="selectOption('l2c-q2', 'C')">(C) Black cars drive faster in rain</button>
+              <button class="option-btn" onclick="selectOption('l2c-q2', 'D')">(D) London passengers preferred it</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析與原文對照</div>
+              <div class="exp-transcript">
+                <strong>Leon:</strong> "<strong>Black paint was the cheapest option for taxis after World War II.</strong> Over time, the black taxi has become a cultural symbol of London."
+              </div>
+              <div class="exp-translation">
+                <strong>中譯：</strong>二戰後黑色油漆是計程車最便宜的選擇。久而久之，黑色計程車成了倫敦的文化象徵。故選 (A)。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3: Speaking Practice 1 -->
+          <div class="question-item" data-qid="l2c-q3" data-correct="A">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 3 題 (課本 Speaking Practice 1, p.52)<br>
+                <span style="font-weight: 500; font-size: 0.9rem;">
+                  Leon: We've been waiting for the taxi for 15 minutes. What's taking so long?<br>
+                  Eunice: It's the morning rush hour now.<br>
+                  Leon: <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>
+                  Eunice: Yeah, so take it easy.
+                </span>
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(52)">
+                🎧 聆聽 Speaking Tips (00:52)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l2c-q3', 'A')">(A) That makes sense.</button>
+              <button class="option-btn" onclick="selectOption('l2c-q3', 'B')">(B) Why not take a bus?</button>
+              <button class="option-btn" onclick="selectOption('l2c-q3', 'C')">(C) Too good to be true.</button>
+              <button class="option-btn" onclick="selectOption('l2c-q3', 'D')">(D) Never been there.</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析</div>
+              <div class="exp-detail">
+                <strong>解析：</strong>Eunice 解釋是因為早上尖峰時段塞車，Leon 認同對方的解釋「有道理、原來如此」，依課本 Speaking Tips 應選 (A) That makes sense.。
+              </div>
+            </div>
+          </div>
+
+          <!-- Q4: Speaking Practice 2 -->
+          <div class="question-item" data-qid="l2c-q4" data-correct="C">
+            <div class="question-top">
+              <div class="q-number-title">
+                第 4 題 (課本 Speaking Practice 2, p.52)<br>
+                <span style="font-weight: 500; font-size: 0.9rem;">
+                  Ruby: <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> Why do so many salespeople wear blue or white shirts?<br>
+                  Bob: I think these colors help make them look professional.<br>
+                  Ruby: I see.
+                </span>
+              </div>
+              <button class="q-audio-jump-btn" onclick="jumpToTime(11)">
+                🎧 聆聽好奇用語 (00:11)
+              </button>
+            </div>
+            <div class="options-grid">
+              <button class="option-btn" onclick="selectOption('l2c-q4', 'A')">(A) I didn't notice that.</button>
+              <button class="option-btn" onclick="selectOption('l2c-q4', 'B')">(B) Why you came here?</button>
+              <button class="option-btn" onclick="selectOption('l2c-q4', 'C')">(C) I'm curious.</button>
+              <button class="option-btn" onclick="selectOption('l2c-q4', 'D')">(D) I don't think so.</button>
+            </div>
+            <div class="explanation-panel">
+              <div class="exp-header">📌 【解答模式】試題解析</div>
+              <div class="exp-detail">
+                <strong>解析：</strong>Ruby 想表達自己很好奇並禮貌發問，應用 (C) I'm curious.（我很好奇 / 請教一下）作為開場白。
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Submit & Scoring Bar -->
+    <div class="submit-bar">
+      <button class="submit-btn" onclick="submitExam()">
+        <span>📊</span> 交卷並上傳試算表 (Submit & Send Record)
+      </button>
+
+      <div id="submitStatusMsg" class="submit-status-msg"></div>
+
+      <div id="scoreResultBox" class="score-result-box">
+        <div id="scoreVal" class="score-number">100%</div>
+        <div id="scoreComment" class="score-comment">太棒了！完全掌握聽力與會話核心重點！</div>
+        <div id="scoreDetail" style="font-size: 0.9rem; color: #475569; margin-top: 8px;"></div>
+      </div>
+
+      <div class="submit-backup-actions">
+        <button class="backup-btn" onclick="exportCSV()">📥 下載本次作答紀錄 (CSV 匯出)</button>
+        <button class="backup-btn" onclick="copyResultText()">📋 複製作答成績摘要</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox(event)">
+    <div class="lightbox-content">
+      <button class="lightbox-close-btn" onclick="closeLightbox()">&times;</button>
+      <img id="lightboxImg" src="" alt="放大檢視圖片">
+    </div>
+  </div>
+
+  <!-- Settings Modal (Google Apps Script Endpoint Config) -->
+  <div id="settingsModal" class="custom-modal" onclick="closeSettingsModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>⚙️ Google 試算表成績回傳設定</h3>
+        <button class="modal-close-x" onclick="closeSettingsModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 12px;">
+          <strong>🎯 目標試算表：</strong><br>
+          <a href="https://docs.google.com/spreadsheets/d/1h__9S-vHV2S4RAUxiA6VwULnN6nscLeYmuk_2zJrmt4/edit?gid=0#gid=0" target="_blank" style="color: var(--primary); text-decoration: underline; word-break: break-all;">
+            https://docs.google.com/spreadsheets/d/1h__9S-vHV2S4RAUxiA6VwULnN6nscLeYmuk_2zJrmt4/edit
+          </a>
+        </p>
+
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-weight: 700; margin-bottom: 6px;">
+            🔗 Google Apps Script 網頁應用程式網址 (Web App URL)：
+          </label>
+          <input type="text" id="gasUrlInput" placeholder="https://script.google.com/macros/s/AKfy.../exec" style="width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.88rem;">
+          <div style="font-size: 0.78rem; color: #64748b; margin-top: 4px;">
+            貼上後點擊儲存，學生在所有裝置交卷時皆會自動寫入上方試算表！
+          </div>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 0.82rem;">
+          <strong>📋 首次設定 3 步驟：</strong>
+          <ol style="margin-left: 20px; margin-top: 4px;">
+            <li>開啟 Google 試算表，點擊頂部「擴充功能」→「Apps Script」。</li>
+            <li>將 <code>output/Google_Apps_Script_Code.js</code> 內容全部貼入取代。</li>
+            <li>點擊「部署」→「新增部署」→ 選擇「網頁應用程式」→ 誰可以存取選「所有人 (Anyone)」→ 點「部署」後複製網址貼在此處。</li>
+          </ol>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 8px;">
+          <button class="backup-btn" onclick="copyGasScriptCode()">📋 複製 GAS 程式碼</button>
+          <button class="mini-btn primary" onclick="saveSettings()">儲存網址設定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Audio Tracks Metadata */
+    const audioData = {
+      'l1-listening': {
+        title: 'L1 官方聽力測驗音檔 (Listening for Process)',
+        file: './audio/14_L1_Listening.mp3',
+        defaultDuration: 85.87
+      },
+      'l1-conversation': {
+        title: 'L1 官方會話音檔 (When an Earthquake Happens)',
+        file: './audio/15_L1_Conversation.mp3',
+        defaultDuration: 97.54
+      },
+      'l2-listening': {
+        title: 'L2 官方聽力測驗音檔 (Cause and Effect)',
+        file: './audio/29_L2_Listening.mp3',
+        defaultDuration: 113.95
+      },
+      'l2-conversation': {
+        title: 'L2 官方會話音檔 (The Colors of Taxis)',
+        file: './audio/30_L2_Conversation.mp3',
+        defaultDuration: 90.44
+      }
+    };
+
+    let currentModule = 'l1-listening';
+    let isAnswerKeyMode = false;
+    let studentAnswers = {};
+    let orderSlots = [null, null, null, null, null];
+    const correctOrder = ['C', 'E', 'A', 'D', 'B'];
+
+    // Google Apps Script Web App URL (stored in localStorage)
+    let gasWebAppUrl = localStorage.getItem('hlc3_gas_url') || '';
+
+    // Timer logic
+    let timerSeconds = 0;
+    let timerInterval = null;
+
+    const audio = document.getElementById('mainAudio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const scrubber = document.getElementById('audioScrubber');
+    const timeBadge = document.getElementById('playerTimeBadge');
+    const trackTitle = document.getElementById('playerTrackTitle');
+
+    // Initialize
+    function init() {
+      loadTrack(currentModule, false);
+      loadSavedStudentInfo();
+
+      audio.addEventListener('timeupdate', onTimeUpdate);
+      audio.addEventListener('loadedmetadata', onLoadedMetadata);
+      audio.addEventListener('play', () => updatePlayBtnState(true));
+      audio.addEventListener('pause', () => updatePlayBtnState(false));
+      audio.addEventListener('ended', () => updatePlayBtnState(false));
+
+      // Start practice timer
+      startTimer();
+    }
+
+    /* Student Info Management */
+    function loadSavedStudentInfo() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('hlc3_student_info') || '{}');
+        if (saved.class) document.getElementById('studentClass').value = saved.class;
+        if (saved.seat) document.getElementById('studentSeat').value = saved.seat;
+        if (saved.name) document.getElementById('studentName').value = saved.name;
+      } catch (e) {}
+
+      if (gasWebAppUrl) {
+        document.getElementById('gasUrlInput').value = gasWebAppUrl;
+      }
+    }
+
+    function saveStudentInfo() {
+      const cls = document.getElementById('studentClass').value.trim();
+      const seat = document.getElementById('studentSeat').value.trim();
+      const name = document.getElementById('studentName').value.trim();
+      localStorage.setItem('hlc3_student_info', JSON.stringify({ class: cls, seat: seat, name: name }));
+      
+      // Clear error states
+      if (cls) document.getElementById('studentClass').classList.remove('input-error');
+      if (seat) document.getElementById('studentSeat').classList.remove('input-error');
+      if (name) document.getElementById('studentName').classList.remove('input-error');
+    }
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const m = Math.floor(timerSeconds / 60);
+        const s = timerSeconds % 60;
+        document.getElementById('examTimer').textContent = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+      }, 1000);
+    }
+
+    function formatTime(secs) {
+      if (isNaN(secs) || secs < 0) secs = 0;
+      const m = Math.floor(secs / 60);
+      const s = Math.floor(secs % 60);
+      return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    function loadTrack(moduleId, autoPlay = false) {
+      const meta = audioData[moduleId];
+      if (!meta) return;
+      trackTitle.textContent = meta.title;
+      audio.src = meta.file;
+      audio.playbackRate = parseFloat(document.getElementById('speedSelect').value) || 1.0;
+      timeBadge.textContent = `00:00 / ${formatTime(meta.defaultDuration)}`;
+      scrubber.value = 0;
+      if (autoPlay) {
+        audio.play().catch(e => console.log('Autoplay prevented:', e));
+      }
+    }
+
+    function updatePlayBtnState(isPlaying) {
+      if (isPlaying) {
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+      } else {
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+      }
+    }
+
+    function togglePlayPause() {
+      if (audio.paused || audio.ended) {
+        audio.play().catch(e => console.log('Audio playback error:', e));
+      } else {
+        audio.pause();
+      }
+    }
+
+    function onTimeUpdate() {
+      if (!audio.duration) return;
+      const cur = audio.currentTime;
+      const dur = audio.duration;
+      timeBadge.textContent = `${formatTime(cur)} / ${formatTime(dur)}`;
+      scrubber.value = (cur / dur) * 100;
+    }
+
+    function onLoadedMetadata() {
+      timeBadge.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+    }
+
+    function seekAudio(percent) {
+      if (!audio.duration) return;
+      audio.currentTime = (percent / 100) * audio.duration;
+    }
+
+    function replayAudio() {
+      if (audio.currentTime > 5) {
+        audio.currentTime -= 5;
+      } else {
+        audio.currentTime = 0;
+      }
+      audio.play().catch(e => {});
+    }
+
+    function changePlaybackSpeed(speed) {
+      audio.playbackRate = parseFloat(speed);
+    }
+
+    const moduleOrder = ['l1-listening', 'l1-conversation', 'l2-listening', 'l2-conversation'];
+
+    function prevTrack() {
+      let idx = moduleOrder.indexOf(currentModule);
+      idx = (idx - 1 + moduleOrder.length) % moduleOrder.length;
+      switchModule(moduleOrder[idx]);
+    }
+
+    function nextTrack() {
+      let idx = moduleOrder.indexOf(currentModule);
+      idx = (idx + 1) % moduleOrder.length;
+      switchModule(moduleOrder[idx]);
+    }
+
+    function jumpToTime(seconds) {
+      audio.currentTime = seconds;
+      audio.play().catch(e => {});
+    }
+
+    /* Switch Module Tabs */
+    function switchModule(moduleId) {
+      currentModule = moduleId;
+      document.querySelectorAll('.unit-tab').forEach((tab, index) => {
+        if (moduleOrder[index] === moduleId) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+
+      document.querySelectorAll('.module-view').forEach(view => {
+        view.classList.remove('active');
+      });
+      const activeView = document.getElementById(`mod-${moduleId}`);
+      if (activeView) activeView.classList.add('active');
+
+      loadTrack(moduleId, false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* Answer Key Mode Toggle */
+    function toggleAnswerKeyMode() {
+      isAnswerKeyMode = !isAnswerKeyMode;
+      const btn = document.getElementById('modeToggleBtn');
+      if (isAnswerKeyMode) {
+        document.body.classList.add('answer-key-mode');
+        btn.classList.add('active-key');
+        btn.innerHTML = '<span>🔑</span> 解答模式 (已開啟)';
+      } else {
+        document.body.classList.remove('answer-key-mode');
+        btn.classList.remove('active-key');
+        btn.innerHTML = '<span>🔑</span> 解答模式';
+      }
+    }
+
+    /* Interactive Multiple-Choice Option Selection */
+    function selectOption(qid, optLetter) {
+      studentAnswers[qid] = optLetter;
+      const qItem = document.querySelector(`[data-qid="${qid}"]`);
+      if (!qItem) return;
+
+      const buttons = qItem.querySelectorAll('.option-btn');
+      const correctOpt = qItem.getAttribute('data-correct');
+
+      buttons.forEach(btn => {
+        btn.classList.remove('selected');
+        if (btn.textContent.trim().startsWith(`(${optLetter})`)) {
+          btn.classList.add('selected');
+        }
+        if (btn.textContent.trim().startsWith(`(${correctOpt})`)) {
+          btn.classList.add('is-correct');
+        }
+      });
+    }
+
+    /* Interactive Ordering Puzzle (Module 1) */
+    function pickLetter(letter) {
+      const emptyIdx = orderSlots.indexOf(null);
+      if (emptyIdx === -1) return;
+
+      orderSlots[emptyIdx] = letter;
+      document.getElementById(`slot-val-${emptyIdx}`).textContent = `(${letter})`;
+      document.getElementById(`slot-${emptyIdx}`).classList.add('filled');
+
+      document.querySelectorAll('#orderPickPool .order-pick-btn').forEach(btn => {
+        if (btn.textContent.includes(`(${letter})`)) {
+          btn.classList.add('used');
+          btn.disabled = true;
+        }
+      });
+    }
+
+    function removeOrderPick(index) {
+      const letter = orderSlots[index];
+      if (!letter) return;
+
+      orderSlots[index] = null;
+      document.getElementById(`slot-val-${index}`).textContent = '?';
+      document.getElementById(`slot-${index}`).classList.remove('filled');
+
+      document.querySelectorAll('#orderPickPool .order-pick-btn').forEach(btn => {
+        if (btn.textContent.includes(`(${letter})`)) {
+          btn.classList.remove('used');
+          btn.disabled = false;
+        }
+      });
+      document.getElementById('orderResultMsg').textContent = '';
+    }
+
+    function resetOrder() {
+      for (let i = 0; i < 5; i++) {
+        removeOrderPick(i);
+      }
+      document.getElementById('orderResultMsg').textContent = '';
+    }
+
+    function checkOrder() {
+      const msg = document.getElementById('orderResultMsg');
+      if (orderSlots.includes(null)) {
+        msg.style.color = '#e11d48';
+        msg.textContent = '⚠️ 請先填滿 5 個步驟的位置再進行檢查！';
+        return;
+      }
+
+      const isCorrect = orderSlots.every((val, idx) => val === correctOrder[idx]);
+      if (isCorrect) {
+        msg.style.color = '#15803d';
+        msg.innerHTML = '🎉 太棒了！順序完全正確：(C) 趴下 → (E) 爬進掩護 → (A) 抓緊桌腳 → (D) 拿避難包 → (B) 前往戶外空曠處！';
+        confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+      } else {
+        msg.style.color = '#dc2626';
+        msg.innerHTML = '❌ 順序有誤喔！請回想時序關鍵字：Firstly (C) → Secondly (E) → Next (A) → After that (D) → (B)。';
+      }
+    }
+
+    /* Lightbox Modal */
+    function openLightbox(src) {
+      const modal = document.getElementById('lightboxModal');
+      const img = document.getElementById('lightboxImg');
+      img.src = src;
+      modal.classList.add('active');
+    }
+
+    function closeLightbox(e) {
+      if (e && e.target && e.target.id === 'lightboxImg') return;
+      document.getElementById('lightboxModal').classList.remove('active');
+    }
+
+    /* Settings Modal */
+    function openSettingsModal() {
+      document.getElementById('settingsModal').classList.add('active');
+    }
+
+    function closeSettingsModal(e) {
+      if (e && e.target && e.target.closest('.modal-box')) return;
+      document.getElementById('settingsModal').classList.remove('active');
+    }
+
+    function saveSettings() {
+      const url = document.getElementById('gasUrlInput').value.trim();
+      gasWebAppUrl = url;
+      localStorage.setItem('hlc3_gas_url', url);
+      alert('✅ Google Apps Script 網址設定已儲存！');
+      closeSettingsModal();
+    }
+
+    function copyGasScriptCode() {
+      const scriptCode = `// 翰林技高英語 Choice 3 聽力與會話互動測驗 — Google Apps Script 端點
+const SPREADSHEET_ID = '1h__9S-vHV2S4RAUxiA6VwULnN6nscLeYmuk_2zJrmt4';
+const SHEET_NAME = '作答紀錄';
+const HEADERS = ['時間戳記','班級','座號','姓名','單元','得分百分比','答對題數','總題數','作答耗時','L1排序結果','錯題列表','各題作答詳情'];
+
+function doPost(e) {
+  try {
+    let data;
+    if (e.postData && e.postData.contents) {
+      try { data = JSON.parse(e.postData.contents); } catch(err) { data = e.parameter || {}; }
+    } else { data = e.parameter || {}; }
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    let sheet = ss.getSheetByName(SHEET_NAME);
+    if (!sheet) {
+      const sheets = ss.getSheets();
+      if (sheets.length === 1 && sheets[0].getLastRow() === 0) { sheet = sheets[0]; sheet.setName(SHEET_NAME); }
+      else { sheet = ss.insertSheet(SHEET_NAME); }
+    }
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(HEADERS);
+      sheet.getRange(1, 1, 1, HEADERS.length).setBackground('#4f46e5').setFontColor('#ffffff').setFontWeight('bold');
+      sheet.setFrozenRows(1);
+    }
+    const timeString = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy/MM/dd HH:mm:ss');
+    const row = [timeString, data.className||'', data.seatNumber||'', data.studentName||'', data.unit||'', data.score||'', data.correctCount??0, data.totalQuestions??0, data.timeSpent||'', data.orderResult||'', data.mistakes||'全對', typeof data.details==='object'?JSON.stringify(data.details):(data.details||'')];
+    sheet.appendRow(row);
+    return ContentService.createTextOutput(JSON.stringify({ok: true, message: '儲存成功'})).setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService.createTextOutput(JSON.stringify({ok: false, error: err.toString()})).setMimeType(ContentService.MimeType.JSON);
+  }
+}`;
+      navigator.clipboard.writeText(scriptCode).then(() => {
+        alert('📋 GAS 程式碼已複製到剪貼簿！可直接貼至 Apps Script 編輯器中。');
+      }).catch(err => {
+        alert('請手動從 output/Google_Apps_Script_Code.js 複製程式碼。');
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeSettingsModal();
+      }
+    });
+
+    /* Submit Exam & Send to Google Sheets */
+    function submitExam() {
+      // 1. Validate student info
+      const cls = document.getElementById('studentClass').value.trim();
+      const seat = document.getElementById('studentSeat').value.trim();
+      const name = document.getElementById('studentName').value.trim();
+
+      let hasError = false;
+      if (!cls) {
+        document.getElementById('studentClass').classList.add('input-error');
+        hasError = true;
+      }
+      if (!seat) {
+        document.getElementById('studentSeat').classList.add('input-error');
+        hasError = true;
+      }
+      if (!name) {
+        document.getElementById('studentName').classList.add('input-error');
+        hasError = true;
+      }
+
+      if (hasError) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        alert('⚠️ 請先於上方填寫「班級、座號與姓名」，才能交卷並上傳作答紀錄喔！');
+        return;
+      }
+
+      saveStudentInfo();
+
+      // 2. Score calculation
+      const questions = document.querySelectorAll('.question-item[data-qid]');
+      let totalQuestions = questions.length + 1; // +1 for ordering task
+      let correctCount = 0;
+      let mistakes = [];
+
+      questions.forEach(q => {
+        const qid = q.getAttribute('data-qid');
+        const correct = q.getAttribute('data-correct');
+        const studentAns = studentAnswers[qid];
+        if (studentAns === correct) {
+          correctCount++;
+        } else {
+          mistakes.push(`${qid}(答:${studentAns || '未答'},正解:${correct})`);
+        }
+      });
+
+      const isOrderCorrect = orderSlots.every((val, idx) => val === correctOrder[idx]);
+      if (isOrderCorrect) {
+        correctCount++;
+      } else {
+        mistakes.push(`L1排序題(排:${orderSlots.map(s => s || '?').join('-')},正解:C-E-A-D-B)`);
+      }
+
+      const percentage = Math.round((correctCount / totalQuestions) * 100);
+      const timeSpentStr = document.getElementById('examTimer').textContent;
+
+      const scoreBox = document.getElementById('scoreResultBox');
+      const scoreVal = document.getElementById('scoreVal');
+      const scoreComment = document.getElementById('scoreComment');
+      const scoreDetail = document.getElementById('scoreDetail');
+      const statusMsg = document.getElementById('submitStatusMsg');
+
+      scoreVal.textContent = `${percentage}%`;
+      scoreDetail.textContent = `考生：${cls}班 ${seat}號 ${name} ｜ 共 ${totalQuestions} 題，答對 ${correctCount} 題 ｜ 作答時間：${timeSpentStr}`;
+
+      if (percentage >= 90) {
+        scoreComment.textContent = '🌟 卓越超群！完美掌握聽力與生活會話所有關鍵訊息與策略！';
+        confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
+      } else if (percentage >= 70) {
+        scoreComment.textContent = '👏 成績優異！因果關係與時序細節掌握度高，表現亮眼！';
+        confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+      } else {
+        scoreComment.textContent = '💪 繼續加油！建議開啟上方「🔑 解答模式」對照中英聽力原文深入複習！';
+      }
+
+      scoreBox.classList.add('show');
+
+      // 3. Prepare payload for Google Sheets
+      const payload = {
+        className: cls,
+        seatNumber: seat,
+        studentName: name,
+        unit: 'L1 & L2 聽力與會話互動測驗',
+        score: `${percentage}%`,
+        correctCount: correctCount,
+        totalQuestions: totalQuestions,
+        timeSpent: timeSpentStr,
+        orderResult: orderSlots.map(s => s || '?').join('->'),
+        mistakes: mistakes.length > 0 ? mistakes.join('; ') : '全對',
+        details: studentAnswers
+      };
+
+      // 4. Send to Google Sheets if GAS URL is configured
+      if (gasWebAppUrl) {
+        statusMsg.style.color = '#4f46e5';
+        statusMsg.innerHTML = '⏳ 正在上傳作答紀錄至 Google 試算表...';
+
+        fetch(gasWebAppUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(() => {
+          statusMsg.style.color = '#15803d';
+          statusMsg.innerHTML = '✅ <strong>作答紀錄已成功同步上傳至 Google 試算表！</strong>';
+        }).catch(err => {
+          statusMsg.style.color = '#d97706';
+          statusMsg.innerHTML = '⚠️ 上傳過程可能有網路延遲，已保留本地紀錄，您可點下方按鈕下載 CSV 備份。';
+        });
+      } else {
+        statusMsg.style.color = '#d97706';
+        statusMsg.innerHTML = '💡 老師尚未設定 Google Apps Script 網址，已完成本地評分！您可點下方按鈕「📥 下載 CSV 備份」或「📋 複製作答成績」。';
+      }
+
+      scoreBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    /* Export CSV with BOM */
+    function exportCSV() {
+      const cls = document.getElementById('studentClass').value.trim() || '未填班級';
+      const seat = document.getElementById('studentSeat').value.trim() || '00';
+      const name = document.getElementById('studentName').value.trim() || '未填姓名';
+      const timeSpentStr = document.getElementById('examTimer').textContent;
+      const score = document.getElementById('scoreVal').textContent;
+
+      let csv = '\uFEFF時間戳記,班級,座號,姓名,單元,得分百分比,作答耗時,L1排序結果,作答詳情\n';
+      const now = new Date().toLocaleString('zh-TW');
+      const order = orderSlots.map(s => s || '?').join('->');
+      const ansDetail = JSON.stringify(studentAnswers).replace(/"/g, '""');
+
+      csv += `"${now}","${cls}","${seat}","${name}","L1 & L2 聽力會話","${score}","${timeSpentStr}","${order}","${ansDetail}"\n`;
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `翰林技英B3_${cls}_${seat}號_${name}_聽力會話作答紀錄.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    /* Copy Result Summary Text */
+    function copyResultText() {
+      const cls = document.getElementById('studentClass').value.trim() || '未填班級';
+      const seat = document.getElementById('studentSeat').value.trim() || '00';
+      const name = document.getElementById('studentName').value.trim() || '未填姓名';
+      const score = document.getElementById('scoreVal').textContent;
+      const timeSpentStr = document.getElementById('examTimer').textContent;
+      const detail = document.getElementById('scoreDetail').textContent;
+
+      const text = `【翰林技高英語 Choice 3 聽力與會話互動測驗】\n班級：${cls} | 座號：${seat} | 姓名：${name}\n成績：${score} (作答時間：${timeSpentStr})\n明細：${detail}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert('📋 成績摘要已成功複製到剪貼簿！可直接傳至 LINE 或 Google Classroom。');
+      }).catch(err => {
+        alert(text);
+      });
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
